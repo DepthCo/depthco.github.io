@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DepthCo — Repuestos e impresión 3D en San Isidro</title>
+  <meta name="description" content="Tu repuesto discontinuado, fabricado en días. Solo necesitamos una foto. Impresión 3D y diseño de repuestos a medida en San Isidro, Buenos Aires. Precio al instante.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Saltar al contenido</a>
+
+  <header class="topbar">
+    <div class="wrap topbar__inner">
+      <a class="brand" href="#inicio" aria-label="DepthCo, inicio">
+        <!-- TODO: reemplazar por img/logo.svg ("Co anidado") cuando esté disponible -->
+        <span class="brand__text">Depth<span class="brand__co">Co</span></span>
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="nav" class="nav" aria-label="Principal">
+        <a href="#servicios">Servicios</a>
+        <a href="#como-trabajamos">Cómo trabajamos</a>
+        <a href="#cotizador">Cotizador</a>
+        <a href="#materiales">Materiales</a>
+        <a href="#faq">Preguntas</a>
+        <a href="#contacto" class="nav__cta">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- 1. HERO -->
+    <section id="inicio" class="hero layers-bg">
+      <div class="wrap hero__inner">
+        <p class="eyebrow">Impresión 3D · San Isidro, Buenos Aires</p>
+        <h1 class="hero__title">Tu repuesto discontinuado, fabricado en días. <span>Solo necesitamos una foto.</span></h1>
+        <p class="hero__lead">¿No tenés el archivo? No importa. Mandanos una foto y nosotros relevamos la pieza, la modelamos y la imprimimos en el material que necesita.</p>
+        <div class="hero__instant">
+          <span class="badge">Precio al instante</span>
+          <p>Mientras otros responden "precio a convenir" en 24&nbsp;h hábiles, acá ves tu precio estimado ahora.</p>
+        </div>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#cotizador" data-tab="foto">Cotizá con una foto</a>
+          <a class="btn btn--ghost" href="#cotizador" data-tab="archivo">Tengo el archivo</a>
+        </div>
+      </div>
+      <div class="hero__stack" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+    </section>
+
+    <!-- 2. SERVICIOS -->
+    <section id="servicios" class="section">
+      <div class="wrap">
+        <header class="section__head build">
+          <p class="eyebrow">Servicios</p>
+          <h2>Fabricamos la pieza que ya no se consigue</h2>
+        </header>
+
+        <article class="feature build">
+          <div class="feature__intro">
+            <p class="eyebrow eyebrow--light">Servicio principal</p>
+            <h3>Repuestos a medida y relevamiento</h3>
+            <p>Traés o mandás la pieza rota o discontinuada (o fotos con medidas). La medimos, la modelamos en CAD, imprimimos una prueba de encaje y entregamos el repuesto. Si el original fallaba, te ofrecemos una versión mejorada: material técnico y refuerzos donde se rompía.</p>
+            <p class="claim">"Un repuesto discontinuado no vale lo que pesa: vale la máquina que vuelve a funcionar."</p>
+          </div>
+          <div class="levels" id="niveles-servicio">
+            <!-- Se completa desde config.js (NIVELES_DISENO) -->
+          </div>
+          <ul class="rules">
+            <li>El diseño se paga una sola vez. El archivo queda guardado en DepthCo: la próxima unidad o reposición solo paga impresión.</li>
+            <li>Plazos: simple 3–5 días hábiles, media 5–7, compleja a convenir. La competencia online tarda 7–10.</li>
+            <li>La muestra se recibe en San Isidro o por envío / moto a cargo del cliente.</li>
+            <li id="regla-bonificado"></li>
+          </ul>
+        </article>
+
+        <div class="cards">
+          <article class="card build">
+            <h3>Prototipos</h3>
+            <p>De tu archivo a la pieza física en días, para probar forma, encaje y función antes de invertir en un molde.</p>
+          </article>
+          <article class="card build">
+            <h3>Series cortas</h3>
+            <p>De 5 a 100 unidades con descuento por cantidad. Ideal para repuestos de reposición y piezas de mantenimiento.</p>
+          </article>
+          <article class="card build">
+            <h3>Multicolor</h3>
+            <p>Hasta 4 colores en una misma pieza: señalética, perillas con indicaciones, piezas de identificación.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. CÓMO TRABAJAMOS -->
+    <section id="como-trabajamos" class="section section--dark">
+      <div class="wrap">
+        <header class="section__head build">
+          <p class="eyebrow eyebrow--light">Cómo trabajamos</p>
+          <h2>Capa por capa, de la foto al repuesto</h2>
+          <p class="section__lead">¿No tenés el archivo? No importa. Mandanos una foto y nosotros relevamos la pieza.</p>
+        </header>
+        <ol class="steps">
+          <li class="step build">
+            <span class="step__n">01</span>
+            <h3>Mandás fotos o la pieza</h3>
+            <p>Por WhatsApp, o la traés a San Isidro. También sirve un plano o un croquis con medidas.</p>
+          </li>
+          <li class="step build">
+            <span class="step__n">02</span>
+            <h3>Relevamos y modelamos</h3>
+            <p>Medimos y la dibujamos en CAD. Te confirmamos precio final y plazo antes de imprimir.</p>
+          </li>
+          <li class="step build">
+            <span class="step__n">03</span>
+            <h3>Prueba de encaje</h3>
+            <p>Imprimimos una muestra para verificar que calce en su lugar. Incluida en piezas de nivel medio.</p>
+          </li>
+          <li class="step build">
+            <span class="step__n">04</span>
+            <h3>Repuesto final</h3>
+            <p>Lo fabricamos en el material definitivo. El archivo queda guardado para la próxima.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 4. COTIZADOR -->
+    <section id="cotizador" class="section section--quote">
+      <div class="wrap">
+        <header class="section__head build">
+          <p class="eyebrow">Cotizador instantáneo</p>
+          <h2>Tu precio, ahora</h2>
+          <p class="section__lead">Elegí cómo arrancar. El precio es estimado y lo confirmamos al revisar tu pieza o archivo.</p>
+        </header>
+        <div class="quote" id="quote">
+          <div class="tabs" role="tablist" aria-label="Tipo de cotización">
+            <button class="tab" role="tab" id="tab-foto" aria-controls="panel-foto" aria-selected="true">Tengo una foto o la pieza</button>
+            <button class="tab" role="tab" id="tab-archivo" aria-controls="panel-archivo" aria-selected="false" tabindex="-1">Tengo el archivo (STL/3MF)</button>
+          </div>
+          <div class="panel" role="tabpanel" id="panel-foto" aria-labelledby="tab-foto" tabindex="0">
+            <!-- Paso 3 -->
+          </div>
+          <div class="panel" role="tabpanel" id="panel-archivo" aria-labelledby="tab-archivo" tabindex="0" hidden>
+            <!-- Paso 4 -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. MATERIALES -->
+    <section id="materiales" class="section section--walnut">
+      <div class="wrap">
+        <header class="section__head build">
+          <p class="eyebrow eyebrow--light">Materiales</p>
+          <h2>El material correcto para cada pieza</h2>
+          <p class="section__lead">Imprimimos en una Elegoo Centauri Carbon 2: CoreXY cerrada, boquilla endurecida a 350&nbsp;°C, cama a 110&nbsp;°C y hasta 4 colores. Volumen máximo de 256 × 256 × 256&nbsp;mm.</p>
+        </header>
+        <div class="materials" id="lista-materiales">
+          <!-- Se completa desde config.js (MATERIALES) -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. TRABAJOS -->
+    <section id="trabajos" class="section">
+      <div class="wrap">
+        <header class="section__head build">
+          <p class="eyebrow">Trabajos realizados</p>
+          <h2>Original vs. repuesto</h2>
+        </header>
+        <div class="gallery">
+          <!-- TODO: reemplazar los placeholders por fotos reales en img/ (ej. img/trabajo-1-original.jpg y img/trabajo-1-repuesto.jpg) -->
+          <figure class="work build">
+            <div class="work__pair">
+              <div class="work__ph"><span>Original</span></div>
+              <div class="work__ph work__ph--new"><span>Repuesto</span></div>
+            </div>
+            <figcaption>Engranaje de máquina discontinuada · PETG-CF</figcaption>
+          </figure>
+          <figure class="work build">
+            <div class="work__pair">
+              <div class="work__ph"><span>Original</span></div>
+              <div class="work__ph work__ph--new"><span>Repuesto</span></div>
+            </div>
+            <figcaption>Buje de desgaste · Nylon PA6</figcaption>
+          </figure>
+          <figure class="work build">
+            <div class="work__pair">
+              <div class="work__ph"><span>Original</span></div>
+              <div class="work__ph work__ph--new"><span>Repuesto</span></div>
+            </div>
+            <figcaption>Tapa de gabinete exterior · ASA</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. FAQ -->
+    <section id="faq" class="section section--alt">
+      <div class="wrap wrap--narrow">
+        <header class="section__head build">
+          <p class="eyebrow">Preguntas frecuentes</p>
+          <h2>Lo que nos preguntan siempre</h2>
+        </header>
+        <div class="faq">
+          <details class="build">
+            <summary>¿Necesito tener el archivo 3D?</summary>
+            <p>No. La mayoría de nuestros clientes llegan con una foto o con la pieza en la mano. Nosotros la relevamos y la modelamos. Si ya tenés el STL o 3MF, el cotizador te da el precio automáticamente.</p>
+          </details>
+          <details class="build">
+            <summary>¿Qué fotos les mando?</summary>
+            <p>De frente, de costado y de arriba, con una regla, calibre o moneda al lado para tener escala. Anotá la medida más importante (diámetro de un eje, distancia entre agujeros) y sumá una foto de dónde va montada.</p>
+          </details>
+          <details class="build">
+            <summary>¿Hacen series?</summary>
+            <p>Sí. Hacemos series cortas con descuento: 5% desde 5 unidades, 10% desde 10 y 15% desde 50. Para más de 100 unidades, escribinos y te pasamos precio por volumen.</p>
+          </details>
+          <details class="build">
+            <summary>¿Qué pasa si no encaja?</summary>
+            <p>En piezas de nivel medio la prueba de encaje está incluida: imprimimos una muestra, la probás y ajustamos antes de la pieza final. Cada prueba adicional cuesta el 50% de la impresión de esa pieza.</p>
+          </details>
+          <details class="build">
+            <summary>¿Me quedo con el archivo?</summary>
+            <p>El archivo queda guardado en DepthCo, así la próxima unidad solo paga impresión. Si querés el archivo CAD (STEP) para vos, se suma un 50% del valor del diseño.</p>
+          </details>
+          <details class="build">
+            <summary>¿Hacen envíos?</summary>
+            <p>Estamos en San Isidro, Zona Norte. Podés retirar o coordinamos envío o moto a cargo del cliente. La muestra para relevar también nos la podés mandar así, y te la devolvemos con el repuesto.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. CONTACTO -->
+    <section id="contacto" class="section section--dark">
+      <div class="wrap contact">
+        <div class="build">
+          <p class="eyebrow eyebrow--light">Contacto</p>
+          <h2>Contanos qué pieza necesitás</h2>
+          <p class="section__lead">Respondemos por WhatsApp. Atendemos empresas, talleres e industrias de Zona Norte y particulares con una pieza puntual.</p>
+          <a class="btn btn--primary" href="https://wa.me/541161191201" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
+        </div>
+        <ul class="contact__list build">
+          <li><span>WhatsApp</span><a href="https://wa.me/541161191201" target="_blank" rel="noopener">+54 11 6119-1201</a></li>
+          <li><span>Instagram</span><a href="https://www.instagram.com/depthco.3d/" target="_blank" rel="noopener">@depthco.3d</a></li>
+          <li><span>Mail</span><a href="mailto:depthcodesign@gmail.com">depthcodesign@gmail.com</a></li>
+          <li><span>Ubicación</span>San Isidro, Buenos Aires</li>
+          <li><span>Mercado Libre</span>También nos encontrás en Mercado Libre</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <span class="brand__text brand__text--light">Depth<span class="brand__co">Co</span></span>
+      <p>Impresión 3D y repuestos a medida · San Isidro, Buenos Aires</p>
+    </div>
+  </footer>
+
+  <a class="wa-float" href="https://wa.me/541161191201" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
+    <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.8 2 6.8L3 29l6.6-2c1.9 1 4.1 1.6 6.4 1.6 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.3c-2 0-4-.6-5.7-1.6l-.4-.2-3.9 1.2 1.2-3.8-.3-.4c-1.2-1.7-1.8-3.7-1.8-5.7C5.1 9.9 10 5.2 16 5.2s10.9 4.7 10.9 10.6S22 26.3 16 26.3zm6-7.9c-.3-.2-1.9-1-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.6.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.4c.2.2 2.4 3.6 5.8 5 .8.3 1.4.5 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.7-.5z"/></svg>
+  </a>
+
+  <script src="config.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

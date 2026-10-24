@@ -1,0 +1,112 @@
+/* DepthCo — interacción general de la página (menú, animaciones, contenido desde config.js). */
+(function () {
+  var cfg = window.DEPTHCO_CONFIG;
+  document.documentElement.classList.add("js");
+
+  function pesos(n) {
+    return "$" + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  // Menú mobile
+  var toggle = document.querySelector(".nav-toggle");
+  var nav = document.getElementById("nav");
+  toggle.addEventListener("click", function () {
+    var open = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!open));
+    toggle.setAttribute("aria-label", open ? "Abrir menú" : "Cerrar menú");
+    nav.classList.toggle("is-open", !open);
+  });
+  nav.addEventListener("click", function (e) {
+    if (e.target.tagName === "A") {
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Abrir menú");
+      nav.classList.remove("is-open");
+    }
+  });
+
+  // Niveles de diseño en Servicios
+  var niveles = document.getElementById("niveles-servicio");
+  if (niveles) {
+    niveles.innerHTML = Object.keys(cfg.NIVELES_DISENO).map(function (k) {
+      var n = cfg.NIVELES_DISENO[k];
+      var extra = n.incluye ? "Incluye " + n.incluye + ". " : "";
+      if (n.nota) extra += n.nota.charAt(0).toUpperCase() + n.nota.slice(1) + ". ";
+      return '<div class="level">' +
+        '<div class="level__top"><h4>' + esc(n.nombre) + '</h4>' +
+        '<span class="level__price"><small>desde</small>' + pesos(n.desde) + '</span></div>' +
+        '<p>' + esc(n.ejemplos.charAt(0).toUpperCase() + n.ejemplos.slice(1)) + '.</p>' +
+        '<p class="level__meta">' + esc(extra) + 'Modelado ' + esc(n.horas) + ' · Plazo ' + esc(n.plazo) + '.</p>' +
+        '</div>';
+    }).join("");
+  }
+  var bonif = document.getElementById("regla-bonificado");
+  if (bonif) {
+    bonif.textContent = "Desde " + cfg.DISENO_BONIFICADO_DESDE + " unidades de la misma pieza, el diseño simple va bonificado.";
+  }
+
+  // Materiales agrupados
+  var lista = document.getElementById("lista-materiales");
+  if (lista) {
+    var grupos = [["Estándar", "Estándar"], ["Técnico", "Técnicos"]];
+    lista.innerHTML = grupos.map(function (g) {
+      var items = cfg.MATERIALES.filter(function (m) { return m.grupo === g[0]; });
+      return '<div class="mgroup build"><h3>' + g[1] + '</h3><ul class="mlist">' +
+        items.map(function (m) {
+          return '<li><strong>' + esc(m.nombre) + '</strong><span class="muso">' + esc(m.uso) + '</span>' +
+            '<p>' + esc(m.cuando) + '</p></li>';
+        }).join("") + '</ul></div>';
+    }).join("");
+  }
+
+  // Animación "se construye" capa por capa
+  var builds = document.querySelectorAll(".build");
+  if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          en.target.classList.add("is-built");
+          io.unobserve(en.target);
+        }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+    builds.forEach(function (el) { io.observe(el); });
+  } else {
+    builds.forEach(function (el) { el.classList.add("is-built"); });
+  }
+
+  // Pestañas del cotizador (accesibles con teclado)
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tabs [role="tab"]'));
+  function activar(tab, foco) {
+    tabs.forEach(function (t) {
+      var sel = t === tab;
+      t.setAttribute("aria-selected", String(sel));
+      t.tabIndex = sel ? 0 : -1;
+      document.getElementById(t.getAttribute("aria-controls")).hidden = !sel;
+    });
+    if (foco) tab.focus();
+    document.dispatchEvent(new CustomEvent("depthco:tab", { detail: tab.id }));
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener("click", function () { activar(t); });
+    t.addEventListener("keydown", function (e) {
+      var j = null;
+      if (e.key === "ArrowRight") j = (i + 1) % tabs.length;
+      if (e.key === "ArrowLeft") j = (i - 1 + tabs.length) % tabs.length;
+      if (e.key === "Home") j = 0;
+      if (e.key === "End") j = tabs.length - 1;
+      if (j !== null) { e.preventDefault(); activar(tabs[j], true); }
+    });
+  });
+  document.querySelectorAll("[data-tab]").forEach(function (a) {
+    a.addEventListener("click", function () {
+      var t = document.getElementById("tab-" + a.getAttribute("data-tab"));
+      if (t) activar(t);
+    });
+  });
+})();
