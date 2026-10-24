@@ -7,6 +7,7 @@
   <meta name="description" content="Tu repuesto discontinuado, fabricado en días. Solo necesitamos una foto. Impresión 3D y diseño de repuestos a medida en San Isidro, Buenos Aires. Precio al instante.">
   <meta name="theme-color" content="#5B3A29">
   <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="img/marca/avatar-instagram.png">
   <!-- Imagen para compartir (WhatsApp, Instagram, LinkedIn). Cuando la web esté publicada,
        conviene poner la URL absoluta en og:image (ver README). -->
   <meta property="og:type" content="website">
@@ -54,8 +55,7 @@
   <header class="topbar">
     <div class="wrap topbar__inner">
       <a class="brand" href="#inicio" aria-label="DepthCo, inicio">
-        <!-- TODO: reemplazar por img/logo.svg ("Co anidado") cuando esté disponible -->
-        <span class="brand__text">Depth<span class="brand__co">Co</span></span>
+        <img src="img/logo.svg" alt="DepthCo" width="144" height="40">
       </a>
       <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">
         <span></span><span></span><span></span>
@@ -405,6 +405,18 @@
             <summary>¿Hacen envíos?</summary>
             <p>Estamos en San Isidro, Zona Norte. Podés retirar o coordinamos envío o moto a cargo del cliente. La muestra para relevar también nos la podés mandar así, y te la devolvemos con el repuesto.</p>
           </details>
+          <details class="build">
+            <summary>¿Hacen factura?</summary>
+            <p>Escribinos por WhatsApp antes de confirmar el pedido y te decimos qué comprobante podemos emitir para tu empresa.</p>
+          </details>
+          <details class="build">
+            <summary>¿Qué pasa si la pieza original trabaja con calor, aceite o esfuerzo?</summary>
+            <p>Lo vemos al relevarla. Para temperatura usamos ABS o ASA, para desgaste y engranajes nylon o PETG-CF, y para máxima rigidez PA-CF. Si la original fallaba, te proponemos una versión reforzada.</p>
+          </details>
+          <details class="build">
+            <summary>¿Cuánto tarda?</summary>
+            <p>Una pieza simple, de 3 a 5 días hábiles; una de nivel medio, de 5 a 7. Si la necesitás en menos de 48 h, marcá "urgente" en el cotizador (+30%).</p>
+          </details>
         </div>
       </div>
     </section>
@@ -431,7 +443,7 @@
 
   <footer class="footer">
     <div class="wrap footer__inner">
-      <span class="brand__text brand__text--light">Depth<span class="brand__co">Co</span></span>
+      <img class="footer__logo" src="img/logo-claro.svg" alt="DepthCo" width="108" height="30">
       <p>Impresión 3D y repuestos a medida · San Isidro, Buenos Aires</p>
     </div>
   <a class="wa-float" href="https://wa.me/541161191201" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">

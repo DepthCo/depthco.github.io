@@ -44,9 +44,10 @@ node test/precios.test.js
 
 ## Logo y fotos
 
-- **Logo:** guardalo como `img/logo.svg` (o `img/logo.png`). Después, en `index.html`, reemplazá
-  `<span class="brand__text">Depth<span class="brand__co">Co</span></span>` dentro del header por
-  `<img src="img/logo.svg" alt="DepthCo">` (está marcado con un `TODO`).
+- **Logo (ya integrado):** `img/logo.svg` (fondo claro) e `img/logo-claro.svg` (fondo oscuro, footer).
+  Símbolo "Co anidado" solo: `img/simbolo.svg` / `img/simbolo-claro.svg`. Favicon: `img/favicon.svg`.
+  Avatar para Instagram: `img/marca/avatar-instagram.png` (1080 × 1080) y `.svg`.
+  Si cambiás el logo, reemplazá esos archivos con el mismo nombre.
 - **Fotos de trabajos (original vs. repuesto):** subilas a `img/` (por ejemplo
   `img/trabajo-1-original.jpg` e `img/trabajo-1-repuesto.jpg`). En la sección "Trabajos realizados" de
   `index.html`, reemplazá cada `<div class="work__ph">…</div>` por
