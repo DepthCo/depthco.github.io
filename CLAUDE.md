@@ -33,7 +33,7 @@ Paleta "Óxido — marrón industrial" (definir como variables CSS en :root; aju
 --grafito: #2B2A28;  /* texto principal y secciones oscuras */
 ```
 - Marrón (nogal/óxido) es el color protagonista de la marca. Usar hueso como fondo general y alternar secciones en nogal o grafito para dar ritmo.
-- Motivo gráfico "capa por capa": líneas horizontales finas y paralelas (como capas de impresión) en separadores, fondos sutiles y en el hover de tarjetas. Animación de entrada de secciones que "se construyen" de abajo hacia arriba, en capas (sutil, rápida, respetar prefers-reduced-motion).
+- Motivo gráfico "capa por capa": líneas horizontales finas y paralelas (como capas de impresión) en separadores, fondos sutiles y en el hover de tarjetas. Animación de entrada de secciones de ARRIBA HACIA ABAJO, suave (solo opacity/transform, sin clip-path; ver animaciones.js), respetar prefers-reduced-motion.
 - Logo: "Co anidado" (símbolo C con la o adentro + "Depth"), en color de la paleta, nunca en blanco y negro. Archivo en /img/logo.svg (o .png). Si todavía no está, dejar un placeholder de texto "DepthCo" en nogal y un TODO.
 - Tipografía: sans geométrica para títulos (ej. Space Grotesk o Archivo desde Google Fonts) + sans neutra para texto (ej. Inter). Números de precio grandes, en óxido.
 - Minimalista, industrial, cálido. Nada que parezca juguete o gimmick. Sin emojis. Fotos reales de piezas sobre fondo neutro.
