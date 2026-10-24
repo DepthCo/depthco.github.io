@@ -9,6 +9,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
 </head>
 <body>
   <a class="skip" href="#main">Saltar al contenido</a>
@@ -222,7 +230,66 @@
             </form>
           </div>
           <div class="panel" role="tabpanel" id="panel-archivo" aria-labelledby="tab-archivo" tabindex="0" hidden>
-            <!-- Paso 4 -->
+            <form class="qgrid" id="form-archivo" novalidate>
+              <div>
+                <fieldset class="qstep">
+                  <legend><span>1</span>Subí tu archivo</legend>
+                  <label class="drop" id="drop">
+                    <input type="file" id="archivo-input" accept=".stl,.3mf">
+                    <strong>Arrastrá tu archivo o tocá para elegirlo</strong>
+                    <span>STL o 3MF, en milímetros. Se procesa en tu navegador: no se sube a ningún servidor.</span>
+                  </label>
+                  <p class="hint"><button type="button" class="linkbtn" id="archivo-ejemplo">Probar con una pieza de ejemplo</button></p>
+                  <p class="file-error" id="archivo-error" role="alert"></p>
+                  <div class="viewer" id="viewer">
+                    <div class="viewer__empty" id="viewer-empty">Acá vas a ver tu pieza en 3D. Arrastrá para girarla.</div>
+                  </div>
+                  <p class="viewer__info" id="viewer-info"></p>
+                </fieldset>
+
+                <fieldset class="qstep">
+                  <legend><span>2</span>Material y opciones</legend>
+                  <div class="fields">
+                    <div class="field--full">
+                      <label class="qlabel" for="archivo-material">Material</label>
+                      <select id="archivo-material" name="material"></select>
+                    </div>
+                    <div>
+                      <label class="qlabel" for="archivo-color">Color</label>
+                      <select id="archivo-color" name="color"></select>
+                    </div>
+                    <div>
+                      <label class="qlabel" for="archivo-relleno">Relleno</label>
+                      <select id="archivo-relleno" name="relleno"></select>
+                    </div>
+                    <div>
+                      <label class="qlabel" for="archivo-cantidad">Cantidad</label>
+                      <input id="archivo-cantidad" name="cantidad" type="number" min="1" step="1" value="1" inputmode="numeric">
+                    </div>
+                    <div>
+                      <span class="qlabel qlabel--spacer" aria-hidden="true">&nbsp;</span>
+                      <label class="check"><input type="checkbox" name="urgente" id="archivo-urgente"> Urgente (menos de 48&nbsp;h)</label>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+
+              <div>
+                <div class="result" aria-live="polite">
+                  <p class="result__label">Precio estimado</p>
+                  <p class="result__price" id="archivo-total">—</p>
+                  <p class="result__unit" id="archivo-unidad">Subí un archivo para ver el precio.</p>
+                  <p class="result__alert" id="archivo-alerta"></p>
+                  <ul class="breakdown" id="archivo-desglose"></ul>
+                  <a class="btn btn--primary btn--wa" id="archivo-wa" href="https://wa.me/541161191201" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true" focusable="false"><use href="#ico-wa"/></svg>
+                    Pedir por WhatsApp
+                  </a>
+                  <p class="disclaimer">Precio estimado. Confirmamos el valor final al revisar el archivo.</p>
+                  <p class="disclaimer">Después de tocar el botón, adjuntá el archivo en el chat de WhatsApp.</p>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -351,5 +418,6 @@
   <script src="pricing.js"></script>
   <script src="main.js"></script>
   <script src="cotizador-foto.js"></script>
+  <script type="module" src="cotizador-archivo.js"></script>
 </body>
 </html>

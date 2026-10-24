@@ -510,3 +510,10 @@ select:focus, input:focus { border-color: var(--oxido); outline: none; box-shado
 .wa-float:hover { background: var(--oxido-hover); color: #fff; transform: translateY(-2px); }
 .qlabel--spacer { display: none; }
 @media (min-width: 560px) { .qlabel--spacer { display: block; } }
+.linkbtn {
+  background: none; border: 0; padding: 4px 0; font: inherit; font-size: .9rem; font-weight: 500;
+  color: var(--oxido); text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
+}
+.linkbtn:hover { color: var(--oxido-hover); }
+[hidden] { display: none !important; }
+@media (min-width: 960px) { .qgrid > div:last-child { position: sticky; top: 84px; } }
