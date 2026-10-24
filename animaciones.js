@@ -30,7 +30,7 @@
       }
       if (en.isIntersecting) {
         // Los bloques que entran juntos (ej. una fila de tarjetas) aparecen escalonados.
-        el.style.setProperty("--retraso", Math.min(tanda++, 4) * 70 + "ms");
+        el.style.setProperty("--retraso", Math.min(tanda++, 4) * 90 + "ms");
         el.classList.add("is-building");
         io.unobserve(el);
       }
