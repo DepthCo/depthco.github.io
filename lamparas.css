@@ -83,15 +83,16 @@ a { color: var(--oxido-claro); }
 .color { position: relative; cursor: pointer; }
 .color input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
 .color span {
-  display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 6px 14px 6px 8px;
+  display: inline-flex; align-items: center; min-height: 40px; padding: 6px 14px;
   border: 1px solid var(--linea); border-radius: 999px; font-size: .88rem; color: var(--texto-2);
 }
-.color i { width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--linea); }
 .color input:checked + span { border-color: var(--hueso); color: var(--hueso); }
 .color input:focus-visible + span { outline: 2px solid var(--oxido-claro); outline-offset: 2px; }
 
 .modelo__compra { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; padding-top: 6px; }
 .modelo__precio { font-family: var(--f-display); font-size: 2.2rem; font-weight: 400; color: var(--oxido-claro); font-variant-numeric: tabular-nums; }
+.modelo__consulta { font-family: var(--f-display); font-style: italic; font-size: 1.5rem; color: var(--oxido-claro); }
+.vacio { padding: 40px 0; font-size: 1.1rem; color: var(--texto-2); }
 .btn {
   display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 10px 22px;
   background: var(--oxido); color: #fff; text-decoration: none; font-weight: 600; font-size: .95rem;

@@ -41,7 +41,7 @@
         <div class="hero__text">
           <p class="kicker">Llaveros personalizados</p>
           <h1>Tu nombre, tu logo, tu marca.<br><span>En un llavero.</span></h1>
-          <p class="hero__lead">Impresos en 3D, con el texto en relieve y en dos colores. Diseñalo acá y mirá el precio al instante, desde una unidad.</p>
+          <p class="hero__lead">Impresos en 3D, en el color que quieras. Con tu nombre, con tu logo, del catálogo o con la idea que tengas. Mirá el precio al instante, desde una unidad.</p>
           <a class="pill pill--light" href="#disenar">Diseñá el tuyo</a>
         </div>
       </div>
@@ -54,33 +54,58 @@
     <section id="disenar" class="studio">
       <div class="wrap">
         <header class="head">
-          <p class="kicker kicker--dark">Diseñalo</p>
-          <h2>Elegí texto, forma y colores</h2>
+          <p class="kicker kicker--dark">Armá tu pedido</p>
+          <h2>Con tu nombre, tu logo, del catálogo o con tu idea</h2>
         </header>
+        <p class="studio__error" id="ll-error" hidden>No pudimos cargar el catálogo. Escribinos por WhatsApp y te pasamos opciones y precios.</p>
         <form class="studio__grid" id="form-llavero" novalidate>
-
           <div class="studio__controls">
-            <div class="ctrl">
+            <fieldset class="ctrl">
+              <legend class="ctrl__label">¿Qué llavero querés?</legend>
+              <div class="modos">
+                <label class="modo"><input type="radio" name="modo" value="nombre" checked><span><strong>Con un nombre</strong><small>o una palabra, una fecha</small></span></label>
+                <label class="modo"><input type="radio" name="modo" value="logo"><span><strong>Con tu logo</strong><small>para tu marca o empresa</small></span></label>
+                <label class="modo"><input type="radio" name="modo" value="catalogo"><span><strong>Del catálogo</strong><small>modelos listos</small></span></label>
+                <label class="modo"><input type="radio" name="modo" value="idea"><span><strong>Tengo una idea</strong><small>contanos qué querés</small></span></label>
+              </div>
+            </fieldset>
+
+            <div class="ctrl" data-modo="nombre">
               <label class="ctrl__label" for="ll-texto">Texto</label>
               <input type="text" id="ll-texto" name="texto" autocomplete="off" spellcheck="false">
               <p class="ctrl__hint" id="ll-texto-hint"></p>
-              <label class="check"><input type="checkbox" id="ll-logo" name="logo"> Quiero mi logo en vez de texto</label>
             </div>
 
-            <fieldset class="ctrl">
+            <div class="ctrl" data-modo="logo">
+              <p class="ctrl__note">Después de tocar el botón, mandanos el logo por WhatsApp (imagen o archivo). El diseño del logo se cobra una sola vez: si después pedís más, pagás solo los llaveros.</p>
+            </div>
+
+            <fieldset class="ctrl" data-modo="catalogo">
+              <legend class="ctrl__label">Elegí el modelo</legend>
+              <div class="modelos" id="ll-modelos"></div>
+            </fieldset>
+
+            <div class="ctrl" data-modo="idea">
+              <label class="ctrl__label" for="ll-idea">Contanos tu idea</label>
+              <textarea id="ll-idea" name="idea" rows="3" placeholder="Ej.: el escudo de mi club, la silueta de mi moto, un personaje"></textarea>
+              <p class="ctrl__hint">No cobramos diseño. Si tenés una imagen de referencia, mandala por WhatsApp.</p>
+            </div>
+
+            <fieldset class="ctrl" data-modo="nombre logo">
               <legend class="ctrl__label">Forma</legend>
               <div class="chips" id="ll-formas"></div>
             </fieldset>
 
             <fieldset class="ctrl">
               <legend class="ctrl__label">Color del llavero</legend>
-              <div class="swatches" id="ll-base"></div>
+              <div class="swatches" id="ll-color1"></div>
+              <input type="text" class="otro" id="ll-color1-otro" placeholder="Escribí el color que quieras" hidden aria-label="Otro color del llavero">
             </fieldset>
 
             <fieldset class="ctrl">
-              <legend class="ctrl__label">Color del texto</legend>
-              <div class="swatches" id="ll-tinta"></div>
-              <p class="ctrl__hint ctrl__hint--warn" id="ll-color-hint" hidden>Elegí un color distinto al del llavero para que el texto se lea.</p>
+              <legend class="ctrl__label" id="ll-color2-label">Color del texto</legend>
+              <div class="swatches" id="ll-color2"></div>
+              <input type="text" class="otro" id="ll-color2-otro" placeholder="Escribí el color que quieras" hidden aria-label="Otro segundo color">
             </fieldset>
 
             <div class="ctrl ctrl--qty">
@@ -167,7 +192,7 @@
   </svg>
 
   <script src="config.js"></script>
-  <script src="catalogo.js"></script>
+  <script src="catalogo-datos.js"></script>
   <script src="llaveros.js"></script>
 </body>
 </html>

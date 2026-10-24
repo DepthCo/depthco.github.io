@@ -1,0 +1,198 @@
+{
+  "_info": "Catálogo de DepthCo. Se edita desde admin.html (o a mano). Los precios en pesos argentinos.",
+  "llaveros": {
+    "precios": [
+      {
+        "desde": 1,
+        "unitario": 4500
+      },
+      {
+        "desde": 10,
+        "unitario": 3800
+      },
+      {
+        "desde": 50,
+        "unitario": 3000
+      },
+      {
+        "desde": 100,
+        "unitario": 2500
+      }
+    ],
+    "disenoLogo": 15000,
+    "cantidadConsultar": 300,
+    "plazo": "3 a 5 días hábiles",
+    "largoMaxTexto": 12,
+    "textoEjemplo": "SOFÍA",
+    "formas": [
+      "Etiqueta",
+      "Redondo",
+      "Placa"
+    ],
+    "colores": [
+      {
+        "nombre": "Blanco",
+        "hex": "#F4F4F2"
+      },
+      {
+        "nombre": "Negro",
+        "hex": "#1E1E1E"
+      },
+      {
+        "nombre": "Gris",
+        "hex": "#8A8F94"
+      },
+      {
+        "nombre": "Plateado",
+        "hex": "#B8BCC2"
+      },
+      {
+        "nombre": "Dorado",
+        "hex": "#C9A227"
+      },
+      {
+        "nombre": "Hueso",
+        "hex": "#EDE6DA"
+      },
+      {
+        "nombre": "Marrón",
+        "hex": "#5B3A29"
+      },
+      {
+        "nombre": "Terracota",
+        "hex": "#A4522F"
+      },
+      {
+        "nombre": "Rojo",
+        "hex": "#C62828"
+      },
+      {
+        "nombre": "Naranja",
+        "hex": "#EF6C00"
+      },
+      {
+        "nombre": "Amarillo",
+        "hex": "#F9C80E"
+      },
+      {
+        "nombre": "Verde",
+        "hex": "#2E7D32"
+      },
+      {
+        "nombre": "Verde claro",
+        "hex": "#7CB342"
+      },
+      {
+        "nombre": "Celeste",
+        "hex": "#4FC3F7"
+      },
+      {
+        "nombre": "Azul",
+        "hex": "#1E4FA3"
+      },
+      {
+        "nombre": "Violeta",
+        "hex": "#6A3FA0"
+      },
+      {
+        "nombre": "Rosa",
+        "hex": "#F48FB1"
+      }
+    ],
+    "modelos": [
+      {
+        "nombre": "Inicial",
+        "descripcion": "Una letra grande, sola o con un detalle chico al costado.",
+        "precio": null,
+        "foto": ""
+      },
+      {
+        "nombre": "Llave de casa",
+        "descripcion": "Silueta de casita para identificar las llaves de cada puerta.",
+        "precio": null,
+        "foto": ""
+      },
+      {
+        "nombre": "Huella",
+        "descripcion": "Huella de mascota, con el nombre del perro o del gato si querés.",
+        "precio": null,
+        "foto": ""
+      },
+      {
+        "nombre": "Mate",
+        "descripcion": "Un mate con bombilla. Ideal para regalo o para vender en tu local.",
+        "precio": null,
+        "foto": ""
+      }
+    ],
+    "fotos": [],
+    "usos": [
+      {
+        "titulo": "Eventos",
+        "texto": "Cumpleaños, casamientos, egresos y bautismos. Un llavero con el nombre de cada invitado."
+      },
+      {
+        "titulo": "Empresas y marcas",
+        "texto": "Merchandising con tu logo para clientes, equipos y ferias. Desde 10 unidades."
+      },
+      {
+        "titulo": "Comercios",
+        "texto": "Inmobiliarias, concesionarias y talleres: el llavero que se va con cada entrega de llaves."
+      },
+      {
+        "titulo": "Regalo",
+        "texto": "Una unidad con el nombre, la inicial o la fecha que quieras."
+      }
+    ]
+  },
+  "lamparas": {
+    "incluye": "Portalámpara, cable con interruptor y lámpara LED de luz cálida.",
+    "plazo": "5 a 7 días hábiles",
+    "colores": [
+      "Hueso",
+      "Blanco",
+      "Terracota",
+      "Marrón",
+      "Negro",
+      "Gris"
+    ],
+    "modelos": [
+      {
+        "nombre": "Capa",
+        "tipo": "De mesa",
+        "descripcion": "Un cilindro de ondas suaves que deja ver cada capa de impresión. La luz atraviesa el material y marca la textura.",
+        "medidas": "Ø 16 × 24 cm",
+        "precio": null,
+        "foto": "",
+        "mercadoLibre": ""
+      },
+      {
+        "nombre": "Duna",
+        "tipo": "De mesa",
+        "descripcion": "Base ancha que se cierra hacia arriba, como un médano. Luz baja y envolvente para la mesa de luz.",
+        "medidas": "Ø 22 × 20 cm",
+        "precio": null,
+        "foto": "",
+        "mercadoLibre": ""
+      },
+      {
+        "nombre": "Faro",
+        "tipo": "De pie de mesa",
+        "descripcion": "Un volumen redondeado sobre una base angosta. Ilumina hacia los costados con una luz pareja.",
+        "medidas": "Ø 20 × 25 cm",
+        "precio": null,
+        "foto": "",
+        "mercadoLibre": ""
+      },
+      {
+        "nombre": "Campana",
+        "tipo": "Colgante",
+        "descripcion": "Pantalla colgante que se abre hacia abajo. Pensada para la mesa del comedor o la barra de la cocina.",
+        "medidas": "Ø 25 × 18 cm",
+        "precio": null,
+        "foto": "",
+        "mercadoLibre": ""
+      }
+    ]
+  }
+}
