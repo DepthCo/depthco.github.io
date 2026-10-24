@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Panel DepthCo</title>
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <header class="bar">
+    <div class="bar__inner">
+      <img src="img/logo-claro.svg" alt="DepthCo" width="115" height="32">
+      <span class="bar__title">Panel</span>
+      <span class="estado" id="estado" role="status"></span>
+      <button type="button" class="btn btn--save" id="guardar" disabled>Guardar cambios</button>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Secciones del panel">
+      <button type="button" role="tab" class="tab" data-tab="llaveros" aria-selected="true">Llaveros</button>
+      <button type="button" role="tab" class="tab" data-tab="lamparas" aria-selected="false">Lámparas</button>
+      <button type="button" role="tab" class="tab" data-tab="repuestos" aria-selected="false">Precios de repuestos</button>
+      <button type="button" role="tab" class="tab" data-tab="conexion" aria-selected="false">Conexión</button>
+    </nav>
+  </header>
+
+  <main class="main">
+    <div class="aviso" id="aviso" hidden></div>
+    <section class="panel" id="panel-llaveros" role="tabpanel"></section>
+    <section class="panel" id="panel-lamparas" role="tabpanel" hidden></section>
+    <section class="panel" id="panel-repuestos" role="tabpanel" hidden></section>
+    <section class="panel" id="panel-conexion" role="tabpanel" hidden>
+      <div class="card">
+        <h2>Conexión con GitHub</h2>
+        <p>Para que el botón <strong>Guardar cambios</strong> publique directo en la web, el panel necesita permiso para escribir en tu repositorio. Esto se configura una sola vez en cada dispositivo (compu o celular).</p>
+        <ol class="pasos">
+          <li>Entrá a <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com → Settings → Developer settings → Fine-grained tokens → Generate new token</a>.</li>
+          <li>En <em>Repository access</em> elegí <strong>Only select repositories</strong> y marcá el repo de la web.</li>
+          <li>En <em>Permissions → Repository permissions → Contents</em> elegí <strong>Read and write</strong>.</li>
+          <li>Generalo, copialo y pegalo acá abajo junto con tu usuario y el nombre del repo.</li>
+        </ol>
+        <div class="grid2">
+          <label class="f"><span>Usuario u organización de GitHub</span><input type="text" id="gh-owner" autocomplete="off" placeholder="ej. depthco"></label>
+          <label class="f"><span>Nombre del repositorio</span><input type="text" id="gh-repo" autocomplete="off" placeholder="ej. depthco-web"></label>
+          <label class="f"><span>Rama</span><input type="text" id="gh-branch" autocomplete="off" value="main"></label>
+          <label class="f"><span>Token</span><input type="password" id="gh-token" autocomplete="off" placeholder="github_pat_…"></label>
+        </div>
+        <div class="acciones">
+          <button type="button" class="btn" id="gh-probar">Guardar y probar conexión</button>
+          <button type="button" class="btn btn--ghost" id="gh-olvidar">Olvidar en este dispositivo</button>
+        </div>
+        <p class="nota" id="gh-resultado" role="status"></p>
+        <p class="nota">El token queda guardado solo en este navegador. No lo compartas: con él se puede modificar la web.</p>
+      </div>
+      <div class="card">
+        <h2>Sin conexión</h2>
+        <p>Si preferís no conectar GitHub, podés descargar los archivos con tus cambios y subirlos a mano al repo (en GitHub: <em>Add file → Upload files</em>, en la misma carpeta).</p>
+        <div class="acciones">
+          <button type="button" class="btn btn--ghost" id="descargar-catalogo">Descargar data/catalogo.json</button>
+          <button type="button" class="btn btn--ghost" id="descargar-config">Descargar config.js</button>
+        </div>
+        <p class="nota">Las fotos solo se pueden subir desde el panel con la conexión activa. Sin conexión, subilas a la carpeta <code>img/productos/</code> y escribí la ruta en el campo de la foto.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="catalogo-datos.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

@@ -42,17 +42,35 @@ Después de cambiar precios, corré el test (necesita Node):
 node test/precios.test.js
 ```
 
+## Panel para editar la web (admin.html)
+
+Entrá a `https://<tu-usuario>.github.io/<repo>/admin.html` (guardalo en favoritos; no aparece en el menú ni en buscadores).
+Desde ahí agregás y editás, sin tocar código:
+
+- **Llaveros:** precios por cantidad, diseño del logo, modelos del catálogo (con foto), colores, formas, fotos de trabajos.
+- **Lámparas:** modelos con foto, precio (vacío = "Consultá el precio") y link de Mercado Libre; colores; qué incluye y plazo.
+- **Precios de repuestos:** hora de máquina, preparación, mínimo, recargos, descuentos, diseño por nivel y materiales.
+
+**Guardar cambios** publica directo en GitHub y la web se actualiza en 1–2 minutos. Las fotos se achican solas antes de subirse.
+
+### Conectar el panel con GitHub (una vez por dispositivo)
+1. GitHub → Settings → Developer settings → **Fine-grained tokens** → Generate new token.
+2. *Repository access*: **Only select repositories** → el repo de la web.
+3. *Permissions → Contents*: **Read and write**. Generalo y copialo.
+4. En el panel, pestaña **Conexión**: usuario, repo, rama (`main`) y el token → **Guardar y probar conexión**.
+
+El token queda guardado solo en ese navegador. Si perdés el celular o la compu, borralo en GitHub (Settings → Fine-grained tokens).
+Sin conexión, el panel deja descargar `catalogo.json` y `config.js` para subirlos a mano.
+
 ## Catálogo: llaveros y lámparas
 
 Dos páginas aparte, con la misma paleta y otra estética: `llaveros.html` y `lamparas.html`.
-**Todos los productos, precios, colores y fotos del catálogo se editan en `catalogo.js`.**
-Los precios y modelos que vienen cargados son de ejemplo: reemplazalos por los reales.
+Los datos están en `data/catalogo.json` (se edita desde el panel). Los modelos y precios que vienen cargados son de ejemplo.
 
-- **Llaveros:** tramos de precio por cantidad (`LLAVEROS.PRECIOS`), diseño del logo aparte (`DISENO_LOGO`),
-  fotos reales en `LLAVEROS.FOTOS` (la galería aparece sola cuando hay al menos una).
-- **Lámparas:** cada modelo en `LAMPARAS.MODELOS`, con `foto` (por ejemplo `img/productos/lampara-capa.jpg`)
-  y `mercadoLibre` (link a la publicación). Sin foto, el modelo se muestra solo con texto.
-- La web no usa imágenes generadas: solo fotos reales de productos.
+- **Llaveros:** el cliente elige con nombre, con logo, del catálogo o "Tengo una idea". Solo el logo paga diseño (una vez);
+  el resto paga el precio por cantidad. Colores: la lista del panel más "Otro" (lo escribe el cliente).
+- **Lámparas:** sin precio cargado muestran "Consultá el precio" y el botón pide el precio por WhatsApp.
+- La web no usa imágenes generadas: solo fotos reales. Sin foto, el producto se muestra con texto.
 
 ## Diseño e impresión: dos módulos
 
@@ -98,8 +116,10 @@ Si los gramos del cotizador se alejan mucho de los del slicer, ajustá `FACTOR_R
 |---|---|
 | `index.html` | Página completa |
 | `styles.css` | Estilos (paleta Óxido en `:root`) |
-| `config.js` | Precios y constantes del cotizador de repuestos |
-| `catalogo.js` | Productos y precios del catálogo (llaveros y lámparas) |
+| `config.js` | Precios y constantes del cotizador de repuestos (también editable desde el panel) |
+| `data/catalogo.json` | Productos y precios del catálogo (llaveros y lámparas), editable desde el panel |
+| `catalogo-datos.js` | Lee el catálogo para las páginas y el panel |
+| `admin.html` / `.css` / `.js` | Panel para editar catálogo y precios |
 | `llaveros.html` / `.css` / `.js` | Página de llaveros personalizados |
 | `lamparas.html` / `.css` / `.js` | Página de lámparas |
 | `pricing.js` | Fórmulas de precio (sin DOM, se usan también en el test) |

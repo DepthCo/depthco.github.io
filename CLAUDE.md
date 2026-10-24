@@ -44,7 +44,7 @@ Paleta "Óxido — marrón industrial" (definir como variables CSS en :root; aju
 - three.js desde CDN para visor 3D y parseo de STL/3MF.
 - Todo el cálculo corre en el navegador (no hay backend).
 - Mobile first. Tiene que andar bien en celular.
-- TODAS las constantes de precios en `config.js` (un solo lugar para editar).
+- TODAS las constantes de precios de repuestos en `config.js` (un solo lugar para editar; también desde admin.html).
 
 ## Equipamiento (sección "Capacidad")
 - Elegoo Centauri Carbon 2 con CANVAS: CoreXY cerrada, boquilla endurecida 350 °C, cama 110 °C, 4 colores. → todos los materiales, técnicos y multicolor
@@ -181,11 +181,17 @@ Precio estimado: $<total> ($<unitario> c/u)
 - Páginas aparte: `llaveros.html` y `lamparas.html`. Misma paleta exacta (mismos hex, sin cambiar tonalidades), otra estética:
   - Llaveros: bloques de color, formas redondeadas, Bricolage Grotesque. Personalizador con precio por cantidad.
   - Lámparas: fondo grafito, serif (Fraunces), catálogo tipo revista.
-- Productos, precios y fotos solo en `catalogo.js`. Pedido por WhatsApp con mensaje que empieza con "pedido:".
+- Productos, precios y fotos solo en `data/catalogo.json` (lo leen las páginas con `catalogo-datos.js`). Pedido por WhatsApp con mensaje que empieza con "pedido:".
+- Llaveros: con nombre, con logo (único que cobra diseño, una vez), del catálogo o "Tengo una idea" (sin cargo de diseño). Colores libres: lista editable + "Otro".
+- Lámparas: precio opcional; sin precio, "Consultá el precio".
+
+## Panel de administración (admin.html)
+- Para el dueño: edita `data/catalogo.json` y `config.js` con formularios y guarda vía API de GitHub (token fine-grained, Contents read/write, guardado solo en localStorage del dispositivo). Sin token, descarga los archivos.
+- Todo lo nuevo que sea "dato" (productos, precios, textos de catálogo) tiene que poder editarse desde el panel.
 - NO generar ni dibujar imágenes de productos (ni SVG ilustrativos). Solo fotos reales; sin foto, mostrar el producto con texto.
 
 ## Reglas para Claude
 - Commits chicos y descriptivos.
 - No agregar dependencias fuera de CDNs.
-- Constantes de precios solo en `config.js`.
+- Constantes de precios de repuestos solo en `config.js`; catálogo solo en `data/catalogo.json`.
 - Antes de terminar, verificar que la página abre sin errores en consola y que los 4 casos del "Chequeo contra el mercado" dan los valores esperados.

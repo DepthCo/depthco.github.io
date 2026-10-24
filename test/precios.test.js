@@ -59,5 +59,17 @@ check(bon.diseno.bonificado && bon.diseno.total === 0, "Diseño simple bonificad
 const noBon = P.cotizarRelevamiento(cfg, { nivel: "media", material: "pla", cantidad: 10 });
 check(!noBon.diseno.bonificado, "Diseño medio no se bonifica");
 
+console.log("Catálogo (data/catalogo.json):");
+let cat = null;
+try { cat = JSON.parse(require("fs").readFileSync(require("path").join(__dirname, "../data/catalogo.json"), "utf8")); } catch (e) { /* se informa abajo */ }
+check(!!cat, "El archivo es JSON válido");
+if (cat) {
+  const tr = cat.llaveros.precios;
+  check(tr.length > 0 && tr[0].desde === 1 && tr.every((t, i) => i === 0 || t.desde > tr[i - 1].desde),
+    "Llaveros: los tramos de precio arrancan en 1 unidad y van en orden");
+  check(cat.llaveros.modelos.every(m => m.nombre) && cat.lamparas.modelos.every(m => m.nombre), "Todos los productos tienen nombre");
+  check(cat.llaveros.colores.every(c => /^#[0-9a-f]{6}$/i.test(c.hex)), "Colores de llaveros con código válido");
+}
+
 console.log(fallas ? `\n${fallas} chequeo(s) fallaron.` : "\nTodo OK.");
 process.exit(fallas ? 1 : 0);
