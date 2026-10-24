@@ -517,3 +517,5 @@ select:focus, input:focus { border-color: var(--oxido); outline: none; box-shado
 .linkbtn:hover { color: var(--oxido-hover); }
 [hidden] { display: none !important; }
 @media (min-width: 960px) { .qgrid > div:last-child { position: sticky; top: 84px; } }
+.brand__text--light .brand__co { color: #E9A47F; }
+.nav .nav__cta { color: var(--oxido-hover) !important; }
