@@ -107,8 +107,12 @@
       "var DEPTHCO_CONFIG = " + JSON.stringify(cfg, null, 2) + ";\n\n" +
       'if (typeof module !== "undefined") module.exports = DEPTHCO_CONFIG;\n';
   }
+  // Lee los datos de config.js como texto (sin ejecutarlo: la política de seguridad no lo permite)
   function leerConfigJs(texto) {
-    return new Function(texto + "\n;return DEPTHCO_CONFIG;")();
+    var ini = texto.indexOf("{", texto.indexOf("DEPTHCO_CONFIG"));
+    var fin = texto.lastIndexOf("};");
+    if (ini === -1 || fin === -1) throw new Error("config.js tiene un formato que el panel no reconoce");
+    return JSON.parse(texto.slice(ini, fin + 1));
   }
 
   /* ---------- Campos ---------- */
@@ -429,7 +433,10 @@
     var catP, cfgP;
     if (g) {
       catP = ghLeer(g, "data/catalogo.json").then(function (f) { return f ? JSON.parse(deBase64(f.content)) : D.cargar(); });
-      cfgP = ghLeer(g, "config.js").then(function (f) { return f ? leerConfigJs(deBase64(f.content)) : window.DEPTHCO_CONFIG; });
+      cfgP = ghLeer(g, "config.js").then(function (f) {
+        if (!f) return window.DEPTHCO_CONFIG;
+        try { return leerConfigJs(deBase64(f.content)); } catch (e) { console.warn(e); return window.DEPTHCO_CONFIG; }
+      });
     } else {
       catP = D.cargar();
       cfgP = Promise.resolve(window.DEPTHCO_CONFIG);

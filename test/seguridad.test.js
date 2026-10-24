@@ -47,5 +47,14 @@ const conSecretos = archivos.filter((f) => patron.test(leer(f)));
 check(conSecretos.length === 0, "Ningún token ni clave en el repositorio" + (conSecretos.length ? ": " + conSecretos.join(", ") : ""));
 check(!/[\w.]+@gmail\.com/.test(index), "El mail no aparece escrito en el HTML (los bots no lo pueden leer)");
 
+console.log("Compatibilidad con la política de seguridad:");
+const propios = ["main.js", "animaciones.js", "pricing.js", "cotizador-foto.js", "cotizador-archivo.js", "catalogo-datos.js", "llaveros.js", "lamparas.js", "admin.js"];
+const conEval = propios.filter((f) => /\beval\s*\(|new Function\s*\(|set(Timeout|Interval)\s*\(\s*["'`]/.test(leer(f)));
+check(conEval.length === 0, "Ningún script ejecuta texto como código (la CSP lo bloquearía)" + (conEval.length ? ": " + conEval.join(", ") : ""));
+const cfgTxt = leer("config.js");
+let cfgOk = false;
+try { cfgOk = !!JSON.parse(cfgTxt.slice(cfgTxt.indexOf("{", cfgTxt.indexOf("DEPTHCO_CONFIG")), cfgTxt.lastIndexOf("};") + 1)).VALOR_HORA; } catch (e) { /* queda en false */ }
+check(cfgOk, "config.js se puede leer como datos (así lo lee el panel)");
+
 console.log(fallas ? `\n${fallas} chequeo(s) fallaron.` : "\nTodo OK.");
 process.exit(fallas ? 1 : 0);
