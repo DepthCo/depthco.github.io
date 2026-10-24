@@ -178,17 +178,8 @@ a:hover { color: var(--oxido-hover); }
 .hero__actions { display: flex; flex-direction: column; gap: 12px; }
 @media (min-width: 560px) { .hero__actions { flex-direction: row; } }
 
-/* Símbolo de la marca en el hero (solo desktop) */
-.hero__mark {
-  display: none;
-  position: absolute; right: 7%; top: 50%; width: 300px; height: auto;
-  transform: translateY(-50%);
-}
-
 @media (min-width: 1000px) {
   .hero { padding: 96px 0 120px; }
-  .hero__inner { padding-right: 340px; }
-  .hero__mark { display: block; }
 }
 
 /* ---------- Secciones ---------- */
