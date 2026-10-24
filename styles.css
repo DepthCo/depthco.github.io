@@ -508,3 +508,5 @@ select:focus, input:focus { border-color: var(--oxido); outline: none; box-shado
   transition: transform .2s, background-color .2s;
 }
 .wa-float:hover { background: var(--oxido-hover); color: #fff; transform: translateY(-2px); }
+.qlabel--spacer { display: none; }
+@media (min-width: 560px) { .qlabel--spacer { display: block; } }
