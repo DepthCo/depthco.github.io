@@ -1,7 +1,6 @@
 /* DepthCo — interacción general de la página (menú, animaciones, contenido desde config.js). */
 (function () {
   var cfg = window.DEPTHCO_CONFIG;
-  document.documentElement.classList.add("js");
 
   function pesos(n) {
     return "$" + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -65,27 +64,6 @@
   }
 
   // Animación "se construye" capa por capa
-  // El contenido nunca queda oculto: solo se anima un bloque que estaba fuera de pantalla al cargar.
-  var builds = document.querySelectorAll(".build");
-  if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    var vistos = new WeakSet();
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (!vistos.has(en.target)) {
-          // Primera lectura: si ya está en pantalla al cargar, no se anima.
-          vistos.add(en.target);
-          if (en.isIntersecting) io.unobserve(en.target);
-          return;
-        }
-        if (en.isIntersecting) {
-          en.target.classList.add("is-building");
-          io.unobserve(en.target);
-        }
-      });
-    });
-    builds.forEach(function (el) { io.observe(el); });
-  }
-
   // Pestañas del cotizador (accesibles con teclado)
   var tabs = Array.prototype.slice.call(document.querySelectorAll('.tabs [role="tab"]'));
   function activar(tab, foco) {

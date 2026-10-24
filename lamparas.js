@@ -40,7 +40,7 @@
       var precio = m.precio
         ? '<span class="modelo__precio">' + pesos(m.precio) + '</span>'
         : '<span class="modelo__consulta">Consultá el precio</span>';
-      return '<article class="modelo' + (m.foto ? " modelo--foto" : "") + '" data-i="' + i + '">' + foto +
+      return '<article class="modelo build' + (m.foto ? " modelo--foto" : "") + '" data-i="' + i + '">' + foto +
         '<div class="modelo__nombre">' + (m.tipo ? '<span class="modelo__n">' + esc(m.tipo) + '</span>' : "") +
         '<h2>' + esc(m.nombre) + '</h2>' + (m.medidas ? '<span class="modelo__spec">' + esc(m.medidas) + '</span>' : "") + '</div>' +
         '<div class="modelo__body">' + (m.descripcion ? '<p class="modelo__desc">' + esc(m.descripcion) + '</p>' : "") +
@@ -52,6 +52,8 @@
         (m.mercadoLibre ? '<a class="link-ml" href="' + esc(m.mercadoLibre) + '" target="_blank" rel="noopener">Ver en Mercado Libre</a>' : "") +
         '</div></div></article>';
     }).join("");
+
+    lista.dispatchEvent(new CustomEvent("depthco:contenido", { bubbles: true }));
 
     lista.addEventListener("change", function (e) {
       if (e.target.type !== "radio") return;

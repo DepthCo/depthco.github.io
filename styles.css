@@ -203,16 +203,23 @@ a:hover { color: var(--oxido-hover); }
 
 @media (min-width: 900px) { .section { padding: 96px 0; } }
 
-/* Entrada "se construye" de abajo hacia arriba */
-/* El contenido es visible siempre; la animación solo se reproduce cuando el bloque entra en pantalla. */
-.js .build.is-building { animation: build-in .55s ease-out both; }
+/* Entrada "se construye" de abajo hacia arriba: suave y corta. El contenido siempre está visible;
+   la animación solo corre cuando un bloque que estaba fuera de pantalla entra en vista (ver animaciones.js). */
+.js .build.is-building { animation: build-in .7s cubic-bezier(.22, .61, .36, 1) var(--retraso, 0ms) both; }
 @keyframes build-in {
-  from { opacity: 0; transform: translateY(18px); clip-path: inset(100% 0 0 0); }
+  from { opacity: 0; transform: translateY(12px); clip-path: inset(30% 0 0 0); }
   to { opacity: 1; transform: none; clip-path: inset(0 0 0 0); }
 }
+/* Primer pantallazo: el encabezado aparece apenas, una sola vez al cargar */
+.js .intro-in > * { animation: intro-in .6s cubic-bezier(.22, .61, .36, 1) both; }
+.js .intro-in > *:nth-child(2) { animation-delay: .06s; }
+.js .intro-in > *:nth-child(3) { animation-delay: .12s; }
+.js .intro-in > *:nth-child(4) { animation-delay: .18s; }
+.js .intro-in > *:nth-child(5) { animation-delay: .24s; }
+@keyframes intro-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .js .build.is-building { animation: none; }
+  .js .build.is-building, .js .intro-in > * { animation: none; }
   * { transition-duration: 0s !important; }
 }
 
@@ -263,7 +270,7 @@ a:hover { color: var(--oxido-hover); }
   /* hover: aparecen las capas */
   content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 0;
   background: repeating-linear-gradient(to bottom, rgba(164, 82, 47, .18) 0 1px, transparent 1px 5px);
-  transition: height .35s ease-out; pointer-events: none;
+  transition: height .45s cubic-bezier(.22, .61, .36, 1); pointer-events: none;
 }
 .card:hover::after, .level:hover::after { height: 100%; }
 .card p { margin: 0; color: var(--texto-2); }

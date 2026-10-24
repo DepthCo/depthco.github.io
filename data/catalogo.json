@@ -51,10 +51,6 @@
         "hex": "#C9A227"
       },
       {
-        "nombre": "Hueso",
-        "hex": "#EDE6DA"
-      },
-      {
         "nombre": "Marrón",
         "hex": "#5B3A29"
       },
@@ -149,7 +145,6 @@
     "incluye": "Portalámpara, cable con interruptor y lámpara LED de luz cálida.",
     "plazo": "5 a 7 días hábiles",
     "colores": [
-      "Hueso",
       "Blanco",
       "Terracota",
       "Marrón",
