@@ -52,8 +52,11 @@
   sel.innerHTML = opts;
 
   var el = {
-    total: document.getElementById("foto-total"),
-    unidad: document.getElementById("foto-unidad"),
+    diseno: document.getElementById("foto-diseno"),
+    disenoMeta: document.getElementById("foto-diseno-meta"),
+    impresion: document.getElementById("foto-impresion"),
+    impresionMeta: document.getElementById("foto-impresion-meta"),
+    suma: document.getElementById("foto-suma"),
     alerta: document.getElementById("foto-alerta"),
     desglose: document.getElementById("foto-desglose"),
     wa: document.getElementById("foto-wa"),
@@ -73,53 +76,64 @@
     var urgente = form.urgente.checked;
 
     var r = P.cotizarRelevamiento(cfg, { nivel: nivel, material: material, cantidad: cantidad, urgente: urgente });
+    var d = r.diseno, imp = r.impresion;
     var nivelCfg = cfg.NIVELES_DISENO[r.nivel];
-    var matNombre = material === "recomendame"
-      ? "a recomendar"
-      : P.material(cfg, material).nombre;
+    var matNombre = material === "recomendame" ? "a recomendar" : P.material(cfg, material).nombre;
     var nivelTexto = nivel === "nose" ? "no sé" : nivelCfg.nombre.toLowerCase();
 
     el.guiaPieza.hidden = tengo !== "pieza";
 
-    var precioTexto;
-    if (r.consultar) {
-      el.total.innerHTML = "A consultar";
-      el.unidad.textContent = "";
-      el.alerta.textContent = "Desde " + cfg.CANTIDAD_CONSULTAR + " unidades: escribinos para precio por volumen.";
-      el.desglose.innerHTML = "";
-      precioTexto = "a consultar";
+    // Módulo 1: diseño
+    var disenoTexto;
+    if (d.bonificado) {
+      el.diseno.textContent = "Bonificado";
+      disenoTexto = "bonificado";
     } else {
-      el.total.innerHTML = "<small>Desde</small>" + P.formatoPesos(r.total);
-      el.unidad.textContent = cantidad > 1 ? cantidad + " unidades" : "1 unidad";
-      var alertas = [];
-      if (nivel === "nose") alertas.push("Lo cotizamos como nivel medio: lo confirmamos al ver las fotos.");
-      if (nivelCfg.nota) alertas.push("Pieza compleja: " + nivelCfg.nota + ".");
-      el.alerta.textContent = alertas.join(" ");
+      el.diseno.innerHTML = "<small>Desde</small>" + P.formatoPesos(d.total);
+      disenoTexto = "desde " + P.formatoPesos(d.total);
+    }
+    el.disenoMeta.textContent = "Nivel " + nivelCfg.nombre.toLowerCase() + " · se paga una sola vez" +
+      (nivelCfg.incluye ? " · incluye " + nivelCfg.incluye : "");
 
-      var filas = [];
-      filas.push(li("Diseño (" + nivelCfg.nombre.toLowerCase() + ", una sola vez)",
-        r.disenoBonificado ? "Diseño bonificado" : P.formatoPesos(r.disenoConRecargo)));
-      filas.push(li("Impresión estimada (" + cfg.GRAMOS_RELEVAMIENTO + " g c/u" +
-        (material === "recomendame" ? ", ref. " + P.material(cfg, r.materialUsado).nombre : "") + ")",
-        P.formatoPesos(r.impresionConRecargo)));
-      if (r.descuento) filas.push(li("Descuento por cantidad", Math.round(r.descuento * 100) + "% en impresión"));
-      if (urgente) filas.push(li("Urgente", "+" + Math.round(cfg.RECARGO_URGENTE * 100) + "%"));
-      if (r.aplicaMinimo) filas.push(li("Pedido mínimo", P.formatoPesos(cfg.PRECIO_MINIMO)));
-      if (nivelCfg.incluye) filas.push(li("Incluye", nivelCfg.incluye));
-      filas.push(li("Plazo", nivelCfg.plazo));
-      el.desglose.innerHTML = filas.join("");
-      precioTexto = P.formatoPesos(r.total);
+    // Módulo 2: impresión
+    var impTexto;
+    var refMaterial = P.material(cfg, r.materialUsado).nombre;
+    if (imp.consultar) {
+      el.impresion.textContent = "A consultar";
+      el.impresionMeta.textContent = cantidad + " unidades";
+      impTexto = "a consultar";
+    } else {
+      el.impresion.textContent = P.formatoPesos(imp.total);
+      el.impresionMeta.textContent = (cantidad > 1 ? cantidad + " unidades · " + P.formatoPesos(imp.porUnidad) + " c/u" : "1 unidad") +
+        " · " + cfg.GRAMOS_RELEVAMIENTO + " g c/u en " + refMaterial + (material === "recomendame" ? " (referencia)" : "");
+      impTexto = P.formatoPesos(imp.total);
     }
 
-    el.disclaimer.textContent = "Precio estimado: la impresión se calcula con " + cfg.GRAMOS_RELEVAMIENTO +
-      " g por unidad. Confirmamos el valor final al revisar tu pieza.";
+    el.suma.textContent = imp.consultar ? "" : "Las dos cosas juntas: desde " + P.formatoPesos(r.total);
+
+    var alertas = [];
+    if (nivel === "nose") alertas.push("Cotizamos el diseño como nivel medio: lo confirmamos al ver las fotos.");
+    if (nivelCfg.nota) alertas.push("Pieza compleja: " + nivelCfg.nota + ".");
+    if (imp.consultar) alertas.push("Desde " + cfg.CANTIDAD_CONSULTAR + " unidades: escribinos para precio de impresión por volumen.");
+    el.alerta.textContent = alertas.join(" ");
+
+    var filas = [];
+    if (imp.descuento && !imp.consultar) filas.push(li("Descuento por cantidad", Math.round(imp.descuento * 100) + "% en impresión"));
+    if (urgente) filas.push(li("Urgente", "+" + Math.round(cfg.RECARGO_URGENTE * 100) + "% en cada módulo"));
+    if (imp.aplicaMinimo && !imp.consultar) filas.push(li("Impresión: pedido mínimo", P.formatoPesos(cfg.PRECIO_MINIMO)));
+    filas.push(li("Plazo", nivelCfg.plazo));
+    el.desglose.innerHTML = filas.join("");
+
+    el.disclaimer.textContent = "Precios estimados. La impresión se calcula con " + cfg.GRAMOS_RELEVAMIENTO +
+      " g por unidad; confirmamos los dos valores al revisar tu pieza.";
 
     var msg = "pedido: relevamiento | tengo: " + TENGO[tengo] +
       " | nivel: " + nivelTexto +
       " | material: " + matNombre +
       " | cantidad: " + cantidad +
       " | urgente: " + (urgente ? "sí" : "no") +
-      " | precio desde: " + precioTexto + ". Te mando las fotos.";
+      " | diseño: " + disenoTexto +
+      " | impresión: " + impTexto + ". Te mando las fotos.";
     el.wa.href = "https://wa.me/" + cfg.WHATSAPP + "?text=" + encodeURIComponent(msg);
   }
 

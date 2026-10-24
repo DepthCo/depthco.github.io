@@ -42,17 +42,19 @@ Después de cambiar precios, corré el test (necesita Node):
 node test/precios.test.js
 ```
 
+## Diseño e impresión: dos módulos
+
+El cotizador cobra el **diseño** (según el nivel de la pieza, una sola vez) y la **impresión** (solo material y
+tiempo de máquina) por separado. Si el cliente trae su archivo, paga solo la impresión, aunque la pieza sea compleja.
+El recargo urgente se aplica a cada módulo; el precio mínimo y el cargo de preparación, solo a la impresión.
+
 ## Logo y fotos
 
 - **Logo (ya integrado):** `img/logo.svg` (fondo claro) e `img/logo-claro.svg` (fondo oscuro, footer).
   Símbolo "Co anidado" solo: `img/simbolo.svg` / `img/simbolo-claro.svg`. Favicon: `img/favicon.svg`.
   Avatar para Instagram: `img/marca/avatar-instagram.png` (1080 × 1080) y `.svg`.
   Si cambiás el logo, reemplazá esos archivos con el mismo nombre.
-- **Fotos de trabajos (original vs. repuesto):** subilas a `img/` (por ejemplo
-  `img/trabajo-1-original.jpg` e `img/trabajo-1-repuesto.jpg`). En la sección "Trabajos realizados" de
-  `index.html`, reemplazá cada `<div class="work__ph">…</div>` por
-  `<img src="img/trabajo-1-original.jpg" alt="Engranaje original roto">`. Lo ideal son fotos cuadradas,
-  sobre fondo neutro, de menos de 300 KB cada una.
+- **Fotos de piezas:** cuando se sume la sección de trabajos realizados (pendiente), van en `img/`.
 - **Imagen para compartir:** `img/og-image.png` (1200 × 630). Si querés, reemplazala por una con foto real.
 
 ## Calibración de la velocidad (g/h)

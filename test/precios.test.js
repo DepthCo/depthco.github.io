@@ -45,13 +45,19 @@ check(Math.abs(vol.gramos - 10 * 1.24 * 0.45) < 1e-9, `Gramos desde volumen: 10 
 check(P.entraEnVolumen(cfg, [256, 100, 50]) && !P.entraEnVolumen(cfg, [257, 10, 10]), "Volumen máximo 256 mm");
 
 const rel = P.cotizarRelevamiento(cfg, { nivel: "simple", material: "recomendame", cantidad: 1, urgente: false });
-check(rel.total === 22600, `Relevamiento simple, 1 u.: ${P.formatoPesos(rel.total)} (15.000 diseño + impresión 50 g PETG)`);
+check(rel.diseno.total === 15000 && rel.impresion.total === 7600,
+  `Relevamiento simple, 1 u.: diseño ${P.formatoPesos(rel.diseno.total)} + impresión ${P.formatoPesos(rel.impresion.total)} (50 g PETG), por separado`);
+const comp = P.cotizarRelevamiento(cfg, { nivel: "compleja", material: "pla", cantidad: 3 });
+const soloImp = P.cotizarImpresion(cfg, { gramos: cfg.GRAMOS_RELEVAMIENTO, material: "pla", cantidad: 3 });
+check(comp.impresion.total === soloImp.total, "La impresión no depende del nivel de diseño");
+const urgRel = P.cotizarRelevamiento(cfg, { nivel: "media", material: "pla", cantidad: 1, urgente: true });
+check(urgRel.diseno.total === 45500, `Urgente también en el diseño: ${P.formatoPesos(urgRel.diseno.total)}`);
 const nose = P.cotizarRelevamiento(cfg, { nivel: "nose", material: "pla", cantidad: 1 });
-check(nose.nivel === "media" && nose.diseno === 35000, "\"No sé\" se cotiza como media");
+check(nose.nivel === "media" && nose.diseno.base === 35000, "\"No sé\" se cotiza como media");
 const bon = P.cotizarRelevamiento(cfg, { nivel: "simple", material: "pla", cantidad: 10 });
-check(bon.disenoBonificado && bon.diseno === 0, "Diseño simple bonificado desde 10 unidades");
+check(bon.diseno.bonificado && bon.diseno.total === 0, "Diseño simple bonificado desde 10 unidades");
 const noBon = P.cotizarRelevamiento(cfg, { nivel: "media", material: "pla", cantidad: 10 });
-check(!noBon.disenoBonificado, "Diseño medio no se bonifica");
+check(!noBon.diseno.bonificado, "Diseño medio no se bonifica");
 
 console.log(fallas ? `\n${fallas} chequeo(s) fallaron.` : "\nTodo OK.");
 process.exit(fallas ? 1 : 0);

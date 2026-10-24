@@ -108,7 +108,10 @@ Es el servicio central para B2B. El cliente trae o manda la pieza rota/discontin
 DepthCo la mide, la modela en CAD (Fusion 360), imprime una prueba de encaje y entrega.
 En el mercado casi nadie publica precios ("precio a convenir"): mostrar precios "desde" es diferencial.
 
-Precio = DISEÑO (se cobra una sola vez) + IMPRESIÓN (fórmula de arriba, por unidad)
+Precio = DISEÑO (se cobra una sola vez) + IMPRESIÓN (fórmula de arriba, por unidad), como DOS MÓDULOS SEPARADOS:
+- Cada módulo tiene su propio precio y se muestra por separado. La impresión solo depende de material y máquina, nunca del nivel de diseño.
+- Si el cliente trae el diseño (archivo), paga solo impresión aunque la pieza sea compleja.
+- Urgente aplica a cada módulo. PRECIO_MINIMO y CARGO_PREPARACION solo a la impresión.
 
 ```js
 VALOR_HORA_DISENO = 10000  // ARS por hora de modelado CAD (precio de lanzamiento)
@@ -138,7 +141,7 @@ En la web — RELEVAMIENTO DESDE FOTO O PIEZA (es como llegan hoy la mayoría de
   a) Paso 1 — ¿Qué tenés? (selector): "Solo fotos" / "Tengo la pieza (rota o entera)" / "Tengo un plano o croquis".
   b) Paso 2 — Nivel de la pieza (tarjetas con ejemplos + ilustración simple con el motivo de capas): Simple / Media / Compleja. Opción "No sé" → se cotiza como media y se aclara "lo confirmamos al ver las fotos".
   c) Paso 3 — Material (o "Recomendame vos"), cantidad, urgencia.
-  d) Resultado: UN SOLO precio total "Desde $X" = diseño del nivel + estimación de impresión con 50 g por unidad (aclarar que es estimado). Desglose chico debajo. Si cantidad >= DISENO_BONIFICADO_DESDE y nivel simple: "Diseño bonificado".
+  d) Resultado: DOS módulos con precio propio: "Diseño desde $X" (nivel) e "Impresión $Y" (estimación con 50 g por unidad, aclarar que es estimado). Debajo, la suma como referencia. Si cantidad >= DISENO_BONIFICADO_DESDE y nivel simple: "Diseño bonificado".
   e) Guía "Cómo sacar las fotos para relevar tu pieza" (checklist visual, 4 ítems):
      - Foto de frente, de costado y de arriba.
      - Una regla, calibre o moneda al lado para tener escala.
@@ -146,7 +149,7 @@ En la web — RELEVAMIENTO DESDE FOTO O PIEZA (es como llegan hoy la mayoría de
      - Una foto de dónde va montada la pieza (ayuda a entender cómo trabaja).
      Si tiene la pieza: "Traela a San Isidro o mandala por envío/moto. Te la devolvemos con el repuesto."
   f) Botón WhatsApp con mensaje:
-     "pedido: relevamiento | tengo: <fotos/pieza/plano> | nivel: <x> | material: <m> | cantidad: <n> | urgente: <sí/no> | precio desde: $<X>. Te mando las fotos."
+     "pedido: relevamiento | tengo: <fotos/pieza/plano> | nivel: <x> | material: <m> | cantidad: <n> | urgente: <sí/no> | diseño: desde $<X> | impresión: $<Y>. Te mando las fotos."
      Debajo: "Las fotos las mandás por WhatsApp después de tocar el botón."
 - Sección "Cómo trabajamos" (proceso de relevamiento, 4 pasos con el motivo capa por capa):
   1. Mandás fotos o la pieza → 2. Relevamos y modelamos (te confirmamos precio y plazo) → 3. Prueba de encaje → 4. Repuesto final. El archivo queda guardado para la próxima.
@@ -170,7 +173,7 @@ Precio estimado: $<total> ($<unitario> c/u)
 3. Cómo trabajamos (relevamiento en 4 pasos)
 4. Cotizador (sección central, 2 pestañas)
 5. Materiales (cuándo usar cada uno)
-6. Trabajos realizados (galería tipo "original vs. repuesto", fotos en /img)
+6. Trabajos realizados: POSTERGADO, no incluir por ahora
 7. Preguntas frecuentes: ¿necesito el archivo? (no), ¿qué fotos mando?, ¿hacen series?, ¿qué pasa si no encaja? (prueba de encaje incluida en media), ¿me quedo con el archivo?, envíos
 8. Contacto + Instagram + botón flotante de WhatsApp en óxido
 

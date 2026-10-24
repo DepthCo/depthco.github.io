@@ -36,15 +36,14 @@ var DepthCoPricing = (function () {
 
   /*
    * Precio de impresión de un pedido.
-   * opts: { gramos, material, cantidad, urgente, extra }
-   *   extra = monto fijo que se suma antes del recargo urgente y del mínimo (ej. diseño).
+   * opts: { gramos, material, cantidad, urgente }
    */
   function cotizarImpresion(cfg, opts) {
     var cantidad = Math.max(1, Math.floor(opts.cantidad || 1));
     var u = unitario(cfg, opts.gramos, opts.material);
     var desc = descuentoPorCantidad(cfg, cantidad);
     var impresion = u.unitario * cantidad * (1 - desc);
-    var subtotal = impresion + cfg.CARGO_PREPARACION + (opts.extra || 0);
+    var subtotal = impresion + cfg.CARGO_PREPARACION;
     if (opts.urgente) subtotal *= 1 + cfg.RECARGO_URGENTE;
     var aplicaMinimo = subtotal < cfg.PRECIO_MINIMO;
     var total = redondearCentena(Math.max(subtotal, cfg.PRECIO_MINIMO));
@@ -79,33 +78,44 @@ var DepthCoPricing = (function () {
     });
   }
 
-  /*
-   * Relevamiento desde foto o pieza: diseño del nivel + impresión estimada.
-   * opts: { nivel: "simple"|"media"|"compleja"|"nose", material: id|"recomendame", cantidad, urgente }
-   */
-  function cotizarRelevamiento(cfg, opts) {
+  // Módulo DISEÑO: depende del nivel de la pieza. Se cobra una sola vez y aparte de la impresión.
+  function cotizarDiseno(cfg, opts) {
     var nivelId = opts.nivel === "nose" ? "media" : opts.nivel;
     var nivel = cfg.NIVELES_DISENO[nivelId];
     if (!nivel) throw new Error("Nivel desconocido: " + opts.nivel);
-    var materialId = opts.material === "recomendame" ? cfg.MATERIAL_RECOMENDADO : opts.material;
     var cantidad = Math.max(1, Math.floor(opts.cantidad || 1));
     var bonificado = nivelId === "simple" && cantidad >= cfg.DISENO_BONIFICADO_DESDE;
-    var diseno = bonificado ? 0 : nivel.desde;
-    var r = cotizarImpresion(cfg, {
+    var base = bonificado ? 0 : nivel.desde;
+    return {
+      nivel: nivelId,
+      bonificado: bonificado,
+      base: base,
+      total: redondearCentena(base * (opts.urgente ? 1 + cfg.RECARGO_URGENTE : 1))
+    };
+  }
+
+  /*
+   * Relevamiento desde foto o pieza: dos módulos independientes.
+   *   diseno    = cotizarDiseno (nivel de la pieza)
+   *   impresion = cotizarImpresion con GRAMOS_RELEVAMIENTO por unidad (solo material y máquina)
+   * opts: { nivel: "simple"|"media"|"compleja"|"nose", material: id|"recomendame", cantidad, urgente }
+   */
+  function cotizarRelevamiento(cfg, opts) {
+    var materialId = opts.material === "recomendame" ? cfg.MATERIAL_RECOMENDADO : opts.material;
+    var diseno = cotizarDiseno(cfg, opts);
+    var impresion = cotizarImpresion(cfg, {
       gramos: cfg.GRAMOS_RELEVAMIENTO,
       material: materialId,
-      cantidad: cantidad,
-      urgente: opts.urgente,
-      extra: diseno
+      cantidad: opts.cantidad,
+      urgente: opts.urgente
     });
-    var factorUrgente = opts.urgente ? 1 + cfg.RECARGO_URGENTE : 1;
-    r.nivel = nivelId;
-    r.materialUsado = materialId;
-    r.diseno = diseno;
-    r.disenoBonificado = bonificado;
-    r.disenoConRecargo = redondearCentena(diseno * factorUrgente);
-    r.impresionConRecargo = r.total - r.disenoConRecargo;
-    return r;
+    return {
+      nivel: diseno.nivel,
+      materialUsado: materialId,
+      diseno: diseno,
+      impresion: impresion,
+      total: diseno.total + impresion.total
+    };
   }
 
   function formatoPesos(n) {
@@ -120,6 +130,7 @@ var DepthCoPricing = (function () {
     unitario: unitario,
     cotizarImpresion: cotizarImpresion,
     cotizarArchivo: cotizarArchivo,
+    cotizarDiseno: cotizarDiseno,
     cotizarRelevamiento: cotizarRelevamiento,
     entraEnVolumen: entraEnVolumen,
     formatoPesos: formatoPesos

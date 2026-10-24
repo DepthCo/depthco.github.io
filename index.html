@@ -111,6 +111,7 @@
             <!-- Se completa desde config.js (NIVELES_DISENO) -->
           </div>
           <ul class="rules">
+            <li>Diseño e impresión se cobran por separado. Si ya tenés el archivo, pagás solo la impresión, por material y tiempo de máquina, sin importar lo compleja que sea la pieza.</li>
             <li>El diseño se paga una sola vez. El archivo queda guardado en DepthCo: la próxima unidad o reposición solo paga impresión.</li>
             <li>Plazos: simple 3–5 días hábiles, media 5–7, compleja a convenir. La competencia online tarda 7–10.</li>
             <li>La muestra se recibe en San Isidro o por envío / moto a cargo del cliente.</li>
@@ -221,9 +222,20 @@
 
               <div>
                 <div class="result" aria-live="polite">
-                  <p class="result__label">Precio total estimado</p>
-                  <p class="result__price" id="foto-total"><small>Desde</small>$0</p>
-                  <p class="result__unit" id="foto-unidad"></p>
+                  <p class="result__label">Tu presupuesto, en dos módulos</p>
+                  <div class="modules">
+                    <div class="module">
+                      <p class="module__name"><span>Módulo 1</span>Diseño</p>
+                      <p class="module__price" id="foto-diseno"></p>
+                      <p class="module__meta" id="foto-diseno-meta"></p>
+                    </div>
+                    <div class="module">
+                      <p class="module__name"><span>Módulo 2</span>Impresión</p>
+                      <p class="module__price" id="foto-impresion"></p>
+                      <p class="module__meta" id="foto-impresion-meta"></p>
+                    </div>
+                  </div>
+                  <p class="result__sum" id="foto-suma"></p>
                   <p class="result__alert" id="foto-alerta"></p>
                   <ul class="breakdown" id="foto-desglose"></ul>
                   <a class="btn btn--primary btn--wa" id="foto-wa" href="#" target="_blank" rel="noopener">
@@ -232,6 +244,7 @@
                   </a>
                   <p class="disclaimer">Las fotos las mandás por WhatsApp después de tocar el botón.</p>
                   <p class="disclaimer" id="foto-disclaimer"></p>
+                  <p class="disclaimer">¿Ya tenés el diseño? Pagás solo la impresión: <button type="button" class="linkbtn" data-tab="archivo">cotizá con tu archivo</button>.</p>
                 </div>
 
                 <div class="guide">
@@ -306,7 +319,7 @@
 
               <div>
                 <div class="result" aria-live="polite">
-                  <p class="result__label">Precio estimado</p>
+                  <p class="result__label">Impresión · solo material y tiempo de máquina</p>
                   <p class="result__price" id="archivo-total">—</p>
                   <p class="result__unit" id="archivo-unidad">Subí un archivo para ver el precio.</p>
                   <p class="result__alert" id="archivo-alerta"></p>
@@ -339,41 +352,7 @@
       </div>
     </section>
 
-    <!-- 6. TRABAJOS -->
-    <section id="trabajos" class="section">
-      <div class="wrap">
-        <header class="section__head build">
-          <p class="eyebrow">Trabajos realizados</p>
-          <h2>Original vs. repuesto</h2>
-        </header>
-        <div class="gallery">
-          <!-- TODO: reemplazar los placeholders por fotos reales en img/ (ej. img/trabajo-1-original.jpg y img/trabajo-1-repuesto.jpg) -->
-          <figure class="work build">
-            <div class="work__pair">
-              <div class="work__ph"><span>Original</span></div>
-              <div class="work__ph work__ph--new"><span>Repuesto</span></div>
-            </div>
-            <figcaption>Engranaje de máquina discontinuada · PETG-CF</figcaption>
-          </figure>
-          <figure class="work build">
-            <div class="work__pair">
-              <div class="work__ph"><span>Original</span></div>
-              <div class="work__ph work__ph--new"><span>Repuesto</span></div>
-            </div>
-            <figcaption>Buje de desgaste · Nylon PA6</figcaption>
-          </figure>
-          <figure class="work build">
-            <div class="work__pair">
-              <div class="work__ph"><span>Original</span></div>
-              <div class="work__ph work__ph--new"><span>Repuesto</span></div>
-            </div>
-            <figcaption>Tapa de gabinete exterior · ASA</figcaption>
-          </figure>
-        </div>
-      </div>
-    </section>
-
-    <!-- 7. FAQ -->
+    <!-- 6. FAQ -->
     <section id="faq" class="section section--alt">
       <div class="wrap wrap--narrow">
         <header class="section__head build">
@@ -383,7 +362,7 @@
         <div class="faq">
           <details class="build">
             <summary>¿Necesito tener el archivo 3D?</summary>
-            <p>No. La mayoría de nuestros clientes llegan con una foto o con la pieza en la mano. Nosotros la relevamos y la modelamos. Si ya tenés el STL o 3MF, el cotizador te da el precio automáticamente.</p>
+            <p>No. La mayoría de nuestros clientes llegan con una foto o con la pieza en la mano. Nosotros la relevamos y la modelamos. Si ya tenés el STL o 3MF, pagás solo la impresión y el cotizador te da el precio automáticamente. El diseño se cobra aparte, únicamente cuando lo hacemos nosotros.</p>
           </details>
           <details class="build">
             <summary>¿Qué fotos les mando?</summary>
@@ -421,7 +400,7 @@
       </div>
     </section>
 
-    <!-- 8. CONTACTO -->
+    <!-- 7. CONTACTO -->
     <section id="contacto" class="section section--dark">
       <div class="wrap contact">
         <div class="build">
