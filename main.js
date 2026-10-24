@@ -65,19 +65,25 @@
   }
 
   // Animación "se construye" capa por capa
+  // El contenido nunca queda oculto: solo se anima un bloque que estaba fuera de pantalla al cargar.
   var builds = document.querySelectorAll(".build");
   if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    var vistos = new WeakSet();
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
+        if (!vistos.has(en.target)) {
+          // Primera lectura: si ya está en pantalla al cargar, no se anima.
+          vistos.add(en.target);
+          if (en.isIntersecting) io.unobserve(en.target);
+          return;
+        }
         if (en.isIntersecting) {
-          en.target.classList.add("is-built");
+          en.target.classList.add("is-building");
           io.unobserve(en.target);
         }
       });
-    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+    });
     builds.forEach(function (el) { io.observe(el); });
-  } else {
-    builds.forEach(function (el) { el.classList.add("is-built"); });
   }
 
   // Pestañas del cotizador (accesibles con teclado)
