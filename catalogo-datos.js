@@ -18,6 +18,13 @@ var DepthCoDatos = {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   },
+  // Solo se aceptan fotos propias (img/…) o links https; cualquier otra cosa se descarta
+  url: function (u, soloHttps) {
+    u = String(u || "").trim();
+    if (/^https:\/\/[^\s"'<>]+$/i.test(u)) return u;
+    if (!soloHttps && /^img\/[\w\-./]+\.(jpe?g|png|webp|avif)$/i.test(u) && u.indexOf("..") === -1) return u;
+    return "";
+  },
   // Precio por unidad de un llavero según los tramos de cantidad
   tramo: function (precios, cantidad) {
     var t = precios[0];

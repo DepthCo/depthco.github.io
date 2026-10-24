@@ -7,7 +7,6 @@ var DEPTHCO_CONFIG = {
   // Contacto
   WHATSAPP: "541161191201",
   INSTAGRAM: "depthco.3d",
-  EMAIL: "depthcodesign@gmail.com",
 
   // Volumen máximo de impresión (Elegoo Centauri Carbon 2), en mm
   VOLUMEN_MAXIMO: [256, 256, 256],

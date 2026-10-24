@@ -190,6 +190,12 @@ Precio estimado: $<total> ($<unitario> c/u)
 - Todo lo nuevo que sea "dato" (productos, precios, textos de catálogo) tiene que poder editarse desde el panel.
 - NO generar ni dibujar imágenes de productos (ni SVG ilustrativos). Solo fotos reales; sin foto, mostrar el producto con texto.
 
+## Seguridad
+- Cada página tiene CSP en un <meta>. No agregar scripts inline ni de otros dominios sin actualizar la CSP.
+- El importmap de three.js lleva huellas de integridad (sha384) y su hash (sha256) va en la CSP de index.html. Si se cambia, recalcular ambos.
+- Nunca poner tokens ni claves en el repo. Mail armado por JS (no escribirlo en el HTML). Links de datos validados con `DepthCoDatos.url`.
+- Correr `node test/seguridad.test.js` y `node test/precios.test.js` antes de terminar.
+
 ## Reglas para Claude
 - Commits chicos y descriptivos.
 - No agregar dependencias fuera de CDNs.

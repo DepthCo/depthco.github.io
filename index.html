@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests; script-src 'self' https://cdn.jsdelivr.net 'sha256-eRzyV2R0i2cCIz0YnhcERNUaxV7Hk1fYfCDiG6Z0E/I='; connect-src 'self' https://cdn.jsdelivr.net">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>DepthCo — Repuestos e impresión 3D en San Isidro</title>
   <meta name="description" content="Tu repuesto discontinuado, fabricado en días. Solo necesitamos una foto. Impresión 3D y diseño de repuestos a medida en San Isidro, Buenos Aires. Precio al instante.">
   <meta name="theme-color" content="#5B3A29">
@@ -30,7 +32,6 @@
       "name": "DepthCo",
       "description": "Impresión 3D y repuestos a medida. Relevamiento desde foto o pieza, diseño CAD e impresión.",
       "telephone": "+54 11 6119-1201",
-      "email": "depthcodesign@gmail.com",
       "address": { "@type": "PostalAddress", "addressLocality": "San Isidro", "addressRegion": "Buenos Aires", "addressCountry": "AR" },
       "areaServed": "Zona Norte, Gran Buenos Aires",
       "sameAs": ["https://www.instagram.com/depthco.3d/"]
@@ -45,6 +46,14 @@
       "imports": {
         "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
         "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      },
+      "integrity": {
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js": "sha384-61S/Nu32S3E5+n+KpCOTb2eRYps6fVKm+9Gz1QBvSePFthb46f063Aa/qe/lykFZ",
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js": "sha384-qlO/ZugKPxAQUAvTlQoo0QECzxJIJySZmCF/DHdb2Xn/hHndFwX/vfUAC9Hbk6LP",
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/STLLoader.js": "sha384-iUykpV7CnAlHYQ2KS0JYVxQcsk6JdCjM1k3R0BuPqwd5p2g2A8HioqUrteJrWZKo",
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/3MFLoader.js": "sha384-sNjxdNRfLxV9LoIjoBMFcSybGWMwumlLlc9xWNOXUrycuDCJJ7NCMEcbSdWwI4r1",
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/libs/fflate.module.js": "sha384-snNAi9XXYJRekU4SDTRWA1r1x/wKnErG2M27uvwQB1fd75zxIe1wC2PeBTl1+/Yy",
+        "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/exporters/STLExporter.js": "sha384-asFNg7wL3Pl1xb8Wnx91cfhJVpmwKWIfOBKZaXNqPDWTLajmNiNQWXd5sP71UzcR"
       }
     }
   </script>
@@ -411,7 +420,7 @@
         <ul class="contact__list build">
           <li><span>WhatsApp</span><a href="https://wa.me/541161191201" target="_blank" rel="noopener">+54 11 6119-1201</a></li>
           <li><span>Instagram</span><a href="https://www.instagram.com/depthco.3d/" target="_blank" rel="noopener">@depthco.3d</a></li>
-          <li><span>Mail</span><a href="mailto:depthcodesign@gmail.com">depthcodesign@gmail.com</a></li>
+          <li><span>Mail</span><a class="js-mail" data-u="depthcodesign" data-d="gmail.com" href="#contacto">depthcodesign (arroba) gmail.com</a></li>
           <li><span>Ubicación</span>San Isidro, Buenos Aires</li>
           <li><span>Mercado Libre</span>También nos encontrás en Mercado Libre</li>
         </ul>

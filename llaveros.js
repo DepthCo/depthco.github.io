@@ -29,9 +29,10 @@
     };
 
     /* ---------- Contenido desde los datos ---------- */
-    if (L.fotos && L.fotos.length) {
-      $("ll-fotos").innerHTML = L.fotos.map(function (f) {
-        return '<img src="' + esc(f.src) + '" alt="' + esc(f.alt || "Llavero DepthCo") + '" loading="lazy">';
+    var fotos = (L.fotos || []).filter(function (f) { return D.url(f.src); });
+    if (fotos.length) {
+      $("ll-fotos").innerHTML = fotos.map(function (f) {
+        return '<img src="' + esc(D.url(f.src)) + '" alt="' + esc(f.alt || "Llavero DepthCo") + '" loading="lazy">';
       }).join("");
       $("ll-fotos-sec").hidden = false;
     }
@@ -46,7 +47,7 @@
     $("ll-modelos").innerHTML = L.modelos.length ? L.modelos.map(function (m, i) {
       return '<label class="modelo-ll"><input type="radio" name="modelo" value="' + i + '"' + (i === 0 ? " checked" : "") + '>' +
         '<span class="modelo-ll__box">' +
-        (m.foto ? '<img src="' + esc(m.foto) + '" alt="" loading="lazy">' : "") +
+        (D.url(m.foto) ? '<img src="' + esc(D.url(m.foto)) + '" alt="" loading="lazy">' : "") +
         '<strong>' + esc(m.nombre) + '</strong>' +
         (m.descripcion ? '<small>' + esc(m.descripcion) + '</small>' : "") +
         '<em>' + (m.precio ? pesos(m.precio) + " c/u" : "Precio según cantidad") + '</em></span></label>';

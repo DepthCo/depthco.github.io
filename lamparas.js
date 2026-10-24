@@ -30,8 +30,9 @@
     }
 
     lista.innerHTML = LA.modelos.map(function (m, i) {
-      var foto = m.foto
-        ? '<figure class="modelo__foto"><img src="' + esc(m.foto) + '" alt="Lámpara ' + esc(m.nombre) + '" loading="lazy"></figure>'
+      var fotoUrl = D.url(m.foto), mlUrl = D.url(m.mercadoLibre, true);
+      var foto = fotoUrl
+        ? '<figure class="modelo__foto"><img src="' + esc(fotoUrl) + '" alt="Lámpara ' + esc(m.nombre) + '" loading="lazy"></figure>'
         : "";
       var colores = LA.colores.concat(["Otro"]).map(function (c, j) {
         return '<label class="color"><input type="radio" name="color-' + i + '" value="' + esc(c) + '"' + (j === 0 ? " checked" : "") + '>' +
@@ -40,7 +41,7 @@
       var precio = m.precio
         ? '<span class="modelo__precio">' + pesos(m.precio) + '</span>'
         : '<span class="modelo__consulta">Consultá el precio</span>';
-      return '<article class="modelo build' + (m.foto ? " modelo--foto" : "") + '" data-i="' + i + '">' + foto +
+      return '<article class="modelo build' + (fotoUrl ? " modelo--foto" : "") + '" data-i="' + i + '">' + foto +
         '<div class="modelo__nombre">' + (m.tipo ? '<span class="modelo__n">' + esc(m.tipo) + '</span>' : "") +
         '<h2>' + esc(m.nombre) + '</h2>' + (m.medidas ? '<span class="modelo__spec">' + esc(m.medidas) + '</span>' : "") + '</div>' +
         '<div class="modelo__body">' + (m.descripcion ? '<p class="modelo__desc">' + esc(m.descripcion) + '</p>' : "") +
@@ -49,7 +50,7 @@
         '<a class="btn" target="_blank" rel="noopener" href="' + waHref(m, LA.colores[0] || "a definir") + '">' +
         '<svg viewBox="0 0 32 32" width="20" height="20" aria-hidden="true" focusable="false"><use href="#ico-wa"/></svg>' +
         (m.precio ? "Encargala" : "Consultar") + '</a>' +
-        (m.mercadoLibre ? '<a class="link-ml" href="' + esc(m.mercadoLibre) + '" target="_blank" rel="noopener">Ver en Mercado Libre</a>' : "") +
+        (mlUrl ? '<a class="link-ml" href="' + esc(mlUrl) + '" target="_blank" rel="noopener">Ver en Mercado Libre</a>' : "") +
         '</div></div></article>';
     }).join("");
 

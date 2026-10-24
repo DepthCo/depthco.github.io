@@ -293,6 +293,8 @@
     else if (tipo === "merma") v = 1 + (Number(v) || 0) / 100;
     set(path, v);
     marcar(path);
+    if (tipo === "url") inp.setCustomValidity(v && !D.url(v, true) ? "Tiene que empezar con https://" : "");
+    if (tipo === "url") inp.reportValidity();
   });
 
   document.addEventListener("click", function (e) {
@@ -346,7 +348,12 @@
     S.cat.llaveros.precios.sort(byDesde);
     S.cfg.DESCUENTO_CANTIDAD.sort(byDesde);
   }
+  var enmarcado = (function () { try { return window.top !== window.self; } catch (e) { return true; } })();
   $("guardar").addEventListener("click", function () {
+    if (enmarcado) {
+      aviso("Por seguridad, el panel solo guarda cuando lo abrís directo en su dirección, no dentro de otra página.", "error");
+      return;
+    }
     var g = gh();
     if (!g) {
       aviso("Para publicar, conectá GitHub en la pestaña Conexión. También podés descargar los archivos desde ahí.", "warn");

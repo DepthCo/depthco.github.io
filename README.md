@@ -34,7 +34,7 @@ HTML + CSS + JS sin frameworks ni build step. Todo el cálculo corre en el naveg
 | Unidades desde las que el diseño simple es gratis | `DISENO_BONIFICADO_DESDE` |
 | Gramos que se asumen al cotizar sin archivo | `GRAMOS_RELEVAMIENTO` |
 | Material de referencia para "Recomendame vos" | `MATERIAL_RECOMENDADO` |
-| WhatsApp, Instagram, mail | `WHATSAPP`, `INSTAGRAM`, `EMAIL` |
+| WhatsApp, Instagram | `WHATSAPP`, `INSTAGRAM` (el mail está en `index.html`, armado para que no lo lean los bots) |
 
 Después de cambiar precios, corré el test (necesita Node):
 
@@ -71,6 +71,30 @@ Los datos están en `data/catalogo.json` (se edita desde el panel). Los modelos 
   el resto paga el precio por cantidad. Colores: la lista del panel más "Otro" (lo escribe el cliente).
 - **Lámparas:** sin precio cargado muestran "Consultá el precio" y el botón pide el precio por WhatsApp.
 - La web no usa imágenes generadas: solo fotos reales. Sin foto, el producto se muestra con texto.
+
+## Seguridad
+
+La web no tiene servidor ni base de datos y **no guarda ninguna clave en el código**: no hay nada secreto que un bot pueda robar.
+La única llave es el token de GitHub del panel, que queda solo en el navegador de tu dispositivo, nunca en el repositorio.
+
+Protecciones incluidas:
+- **Política de seguridad (CSP) en cada página:** el navegador solo ejecuta código de la propia web (y three.js desde jsDelivr en la portada).
+  Si alguien lograra inyectar un script, se bloquea. En el panel solo se permite hablar con la API de GitHub.
+- **Integridad de three.js:** cada archivo que viene del CDN tiene su huella; si alguien lo adultera allá, el navegador no lo ejecuta.
+- **Mail protegido de bots:** se arma en el navegador, no aparece escrito en el HTML.
+- **Datos del catálogo saneados:** textos escapados; solo se aceptan fotos propias (`img/…`) y links `https://`.
+- **Panel:** no aparece en buscadores, no guarda si lo meten dentro de otra página y sin token no puede modificar nada.
+- `node test/seguridad.test.js` verifica todo esto. Correlo junto con `node test/precios.test.js` después de cada cambio.
+
+Lo que tenés que hacer vos en GitHub (una sola vez):
+1. Activar la **verificación en dos pasos** en tu cuenta (Settings → Password and authentication).
+2. Crear el token del panel con **lo mínimo**: solo este repositorio, solo *Contents: Read and write*, y con **vencimiento** (por ejemplo 90 días).
+3. En el repo: Settings → Pages → tildar **Enforce HTTPS**.
+4. Dejar activado *Secret scanning* y *Push protection* (Settings → Code security; vienen activados en repos públicos).
+5. Si perdés el celular o la compu con el panel abierto, borrá el token en GitHub (Settings → Developer settings → Fine-grained tokens).
+
+Lo que es público a propósito: el número de WhatsApp (es el canal de contacto) y los precios (se ven en la web).
+El repositorio tiene que ser público para usar GitHub Pages gratis; no hay problema porque no contiene secretos.
 
 ## Diseño e impresión: dos módulos
 
@@ -126,5 +150,7 @@ Si los gramos del cotizador se alejan mucho de los del slicer, ajustá `FACTOR_R
 | `main.js` | Menú, animaciones, pestañas, contenido generado desde config |
 | `cotizador-foto.js` | Pestaña "Tengo una foto o la pieza" |
 | `cotizador-archivo.js` | Pestaña "Tengo el archivo": visor 3D (three.js por CDN), volumen STL/3MF |
-| `test/precios.test.js` | Chequeo contra el mercado |
+| `test/precios.test.js` | Chequeo contra el mercado y del catálogo |
+| `test/seguridad.test.js` | Chequeos de seguridad (CSP, integridad, secretos) |
+| `animaciones.js` | Animaciones de entrada y scroll arriba al cambiar de página |
 | `CLAUDE.md` | Brief del proyecto para Claude |

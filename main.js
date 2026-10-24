@@ -12,6 +12,13 @@
     });
   }
 
+  // Mail armado en el navegador: los bots que juntan direcciones para spam no lo encuentran en el código
+  document.querySelectorAll(".js-mail").forEach(function (a) {
+    var dir = a.getAttribute("data-u") + "@" + a.getAttribute("data-d");
+    a.href = "mailto:" + dir;
+    a.textContent = dir;
+  });
+
   // Menú mobile
   var toggle = document.querySelector(".nav-toggle");
   var nav = document.getElementById("nav");
