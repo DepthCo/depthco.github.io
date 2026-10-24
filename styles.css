@@ -496,3 +496,4 @@ select:focus, input:focus { border-color: var(--oxido); outline: none; box-shado
 .result__sum { margin: 0 0 10px; font-size: .92rem; color: #E5DDD0; }
 .result .linkbtn { color: #F0A27A; font-size: inherit; padding: 0; }
 .result .linkbtn:hover { color: #F7C2A5; }
+.footer a { color: #E9A47F; }

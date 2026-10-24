@@ -177,6 +177,13 @@ Precio estimado: $<total> ($<unitario> c/u)
 7. Preguntas frecuentes: ¿necesito el archivo? (no), ¿qué fotos mando?, ¿hacen series?, ¿qué pasa si no encaja? (prueba de encaje incluida en media), ¿me quedo con el archivo?, envíos
 8. Contacto + Instagram + botón flotante de WhatsApp en óxido
 
+## Catálogo de productos (llaveros y lámparas)
+- Páginas aparte: `llaveros.html` y `lamparas.html`. Misma paleta exacta (mismos hex, sin cambiar tonalidades), otra estética:
+  - Llaveros: bloques de color, formas redondeadas, Bricolage Grotesque. Personalizador con precio por cantidad.
+  - Lámparas: fondo grafito, serif (Fraunces), catálogo tipo revista.
+- Productos, precios y fotos solo en `catalogo.js`. Pedido por WhatsApp con mensaje que empieza con "pedido:".
+- NO generar ni dibujar imágenes de productos (ni SVG ilustrativos). Solo fotos reales; sin foto, mostrar el producto con texto.
+
 ## Reglas para Claude
 - Commits chicos y descriptivos.
 - No agregar dependencias fuera de CDNs.

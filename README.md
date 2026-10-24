@@ -42,6 +42,18 @@ Después de cambiar precios, corré el test (necesita Node):
 node test/precios.test.js
 ```
 
+## Catálogo: llaveros y lámparas
+
+Dos páginas aparte, con la misma paleta y otra estética: `llaveros.html` y `lamparas.html`.
+**Todos los productos, precios, colores y fotos del catálogo se editan en `catalogo.js`.**
+Los precios y modelos que vienen cargados son de ejemplo: reemplazalos por los reales.
+
+- **Llaveros:** tramos de precio por cantidad (`LLAVEROS.PRECIOS`), diseño del logo aparte (`DISENO_LOGO`),
+  fotos reales en `LLAVEROS.FOTOS` (la galería aparece sola cuando hay al menos una).
+- **Lámparas:** cada modelo en `LAMPARAS.MODELOS`, con `foto` (por ejemplo `img/productos/lampara-capa.jpg`)
+  y `mercadoLibre` (link a la publicación). Sin foto, el modelo se muestra solo con texto.
+- La web no usa imágenes generadas: solo fotos reales de productos.
+
 ## Diseño e impresión: dos módulos
 
 El cotizador cobra el **diseño** (según el nivel de la pieza, una sola vez) y la **impresión** (solo material y
@@ -86,7 +98,10 @@ Si los gramos del cotizador se alejan mucho de los del slicer, ajustá `FACTOR_R
 |---|---|
 | `index.html` | Página completa |
 | `styles.css` | Estilos (paleta Óxido en `:root`) |
-| `config.js` | Precios y constantes |
+| `config.js` | Precios y constantes del cotizador de repuestos |
+| `catalogo.js` | Productos y precios del catálogo (llaveros y lámparas) |
+| `llaveros.html` / `.css` / `.js` | Página de llaveros personalizados |
+| `lamparas.html` / `.css` / `.js` | Página de lámparas |
 | `pricing.js` | Fórmulas de precio (sin DOM, se usan también en el test) |
 | `main.js` | Menú, animaciones, pestañas, contenido generado desde config |
 | `cotizador-foto.js` | Pestaña "Tengo una foto o la pieza" |
