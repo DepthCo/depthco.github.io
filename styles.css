@@ -209,6 +209,11 @@ a:hover { color: var(--oxido-hover); }
 .motion .build.is-in, .motion .reveal.is-in { animation: drop-in 1s var(--ease) var(--retraso, 0ms) both; will-change: opacity, transform; }
 @keyframes drop-in { from { opacity: 0; transform: translate3d(0, -16px, 0); } to { opacity: 1; transform: translate3d(0, 0, 0); } }
 
+/* Esperando entrar en pantalla (motion.js): mismo estado que el comienzo de la animación, así no hay saltos */
+.motion .reveal.is-pending, .motion .build.is-pending { opacity: 0; transform: translate3d(0, -16px, 0); }
+.motion [data-split].is-pending .wi { transform: translate3d(0, -110%, 0); }
+@media print { .motion .is-pending, .motion .is-pending .wi { opacity: 1 !important; transform: none !important; } }
+
 /* Títulos palabra por palabra ([data-split]): cada palabra baja desde arriba dentro de su máscara */
 [data-split] .w { display: inline-block; overflow: hidden; vertical-align: top; padding: .1em 0 .06em; margin: -.1em 0 -.06em; }
 [data-split] .wi { display: inline-block; }
@@ -223,8 +228,7 @@ a:hover { color: var(--oxido-hover); }
 .motion .hero__instant.hero-in { animation-delay: calc(var(--intro) + .68s); }
 .motion .hero__actions.hero-in { animation-delay: calc(var(--intro) + .8s); }
 
-/* Párrafo que se enciende con el scroll ([data-scrub]) */
-[data-scrub] .sw { transition: opacity .25s linear; }
+/* Párrafo que se enciende con el scroll ([data-scrub]): sin transición, lo maneja motion.js por escalones */
 
 /* Botones que siguen apenas al mouse */
 .magnetic { transition: transform .5s var(--ease), background-color .25s, color .25s, border-color .25s; will-change: transform; }

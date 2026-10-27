@@ -128,6 +128,10 @@ a { color: var(--oxido-claro); }
 /* Movimiento (motion.js): bloques y títulos entran desde arriba; solo opacity/transform */
 .motion .build.is-in, .motion .reveal.is-in { animation: drop-in 1s cubic-bezier(.22, 1, .36, 1) var(--retraso, 0ms) both; will-change: opacity, transform; }
 @keyframes drop-in { from { opacity: 0; transform: translate3d(0, -18px, 0); } to { opacity: 1; transform: translate3d(0, 0, 0); } }
+/* Esperando entrar en pantalla (motion.js): mismo estado que el comienzo de la animación, así no hay saltos */
+.motion .reveal.is-pending, .motion .build.is-pending { opacity: 0; transform: translate3d(0, -18px, 0); }
+.motion [data-split].is-pending .wi { transform: translate3d(0, -110%, 0); }
+@media print { .motion .is-pending, .motion .is-pending .wi { opacity: 1 !important; transform: none !important; } }
 [data-split] .w { display: inline-block; overflow: hidden; vertical-align: top; padding: .1em 0 .04em; margin: -.1em 0 -.04em; }
 [data-split] .wi { display: inline-block; }
 .motion [data-split].is-in .wi { animation: word-in 1s cubic-bezier(.22, 1, .36, 1) calc(var(--i) * 45ms) both; }
