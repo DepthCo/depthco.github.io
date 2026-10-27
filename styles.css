@@ -259,15 +259,6 @@ html.splash body::after {
   70%, 100% { clip-path: inset(0 0 0 0); opacity: 0; transform: translate3d(0, -24px, 0); }
 }
 
-/* Banda en movimiento */
-.band { position: relative; background: var(--oxido); color: #fff; overflow: hidden; padding: 16px 0; }
-.marquee { display: flex; }
-.marquee__track { display: flex; align-items: center; gap: 26px; flex: none; padding-right: 26px; animation: marquee 40s linear infinite; }
-.marquee__track span { font-family: var(--f-titulo); font-weight: 700; font-size: clamp(1.15rem, 2.6vw, 1.6rem); line-height: 1; white-space: nowrap; letter-spacing: -0.01em; }
-.marquee__track img { width: 22px; height: auto; flex: none; }
-.band:hover .marquee__track { animation-play-state: paused; }
-@keyframes marquee { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-50%, 0, 0); } }
-
 /* Barra de progreso de los pasos ([data-progress]) */
 .steps-track { position: relative; height: 2px; background: var(--linea-clara); margin-bottom: 28px; overflow: hidden; }
 .steps-track span { position: absolute; inset: 0; background: #E9A47F; transform: scaleX(0); transform-origin: left; }
