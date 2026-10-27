@@ -1,4 +1,4 @@
-/* DepthCo — interacción de la portada: menú, contenido desde config.js y el catálogo, pestañas del cotizador. */
+/* DepthCo — interacción general de la página (menú, animaciones, contenido desde config.js). */
 (function () {
   var cfg = window.DEPTHCO_CONFIG;
 
@@ -22,77 +22,34 @@
   // Menú mobile
   var toggle = document.querySelector(".nav-toggle");
   var nav = document.getElementById("nav");
-  function menu(abrir) {
-    toggle.setAttribute("aria-expanded", String(abrir));
-    toggle.setAttribute("aria-label", abrir ? "Cerrar menú" : "Abrir menú");
-    nav.classList.toggle("is-open", abrir);
-    document.documentElement.classList.toggle("menu-open", abrir);
-  }
-  toggle.addEventListener("click", function () { menu(toggle.getAttribute("aria-expanded") !== "true"); });
-  nav.addEventListener("click", function (e) { if (e.target.closest("a")) menu(false); });
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && nav.classList.contains("is-open")) { menu(false); toggle.focus(); } });
-
-  // Contador de materiales del hero: sale de config.js
-  var statMat = document.getElementById("stat-materiales");
-  if (statMat) { statMat.setAttribute("data-count", cfg.MATERIALES.length); statMat.textContent = cfg.MATERIALES.length; }
-
-  // Hero: cotizaciones de ejemplo calculadas con la misma fórmula del cotizador (config.js)
-  var ticket = document.querySelector(".ticket");
-  if (ticket && window.DepthCoPricing) {
-    var ejemplos = [
-      { pieza: "Engranaje de repuesto", material: "petg", gramos: 40 },
-      { pieza: "Soporte de motor", material: "pla", gramos: 80 },
-      { pieza: "Buje de desgaste", material: "pa6", gramos: 30 },
-      { pieza: "Carcasa de comando", material: "petg", gramos: 120 }
-    ].filter(function (e) { return cfg.MATERIALES.some(function (m) { return m.id === e.material; }); });
-    var campos = {};
-    ticket.querySelectorAll("[data-ticket]").forEach(function (el) { campos[el.getAttribute("data-ticket")] = el; });
-    var actual = 0, pausa = false;
-    function mostrar(i) {
-      var e = ejemplos[i];
-      if (!e) return;
-      var c = DepthCoPricing.cotizarImpresion(cfg, { gramos: e.gramos, material: e.material, cantidad: 1, urgente: false });
-      var min = Math.round(c.horas * 60);
-      campos.pieza.textContent = e.pieza;
-      campos.material.textContent = cfg.MATERIALES.filter(function (m) { return m.id === e.material; })[0].nombre;
-      campos.gramos.textContent = e.gramos + " g";
-      campos.horas.textContent = ((min >= 60 ? Math.floor(min / 60) + " h " : "") + (min % 60 ? (min % 60) + " min" : "")).trim();
-      campos.total.textContent = pesos(c.total);
-      ticket.classList.remove("is-printing");
-      void ticket.offsetWidth; // reinicia la animación de capas
-      ticket.classList.add("is-printing");
+  toggle.addEventListener("click", function () {
+    var open = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!open));
+    toggle.setAttribute("aria-label", open ? "Abrir menú" : "Cerrar menú");
+    nav.classList.toggle("is-open", !open);
+    document.documentElement.classList.toggle("menu-open", !open);
+  });
+  nav.addEventListener("click", function (e) {
+    if (e.target.tagName === "A") {
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Abrir menú");
+      nav.classList.remove("is-open");
+      document.documentElement.classList.remove("menu-open");
     }
-    mostrar(0);
-    ticket.addEventListener("pointerenter", function () { pausa = true; });
-    ticket.addEventListener("pointerleave", function () { pausa = false; });
-    if (ejemplos.length > 1 && document.documentElement.classList.contains("motion")) {
-      setInterval(function () {
-        if (pausa || document.hidden || ticket.getBoundingClientRect().bottom < 0) return;
-        actual = (actual + 1) % ejemplos.length;
-        mostrar(actual);
-      }, 5200);
-    }
-  }
+  });
 
-  // Llaveros y lámparas: precio "desde", cantidad de modelos y foto, leídos del catálogo
-  if (window.DepthCoDatos && document.querySelector("[data-prod-meta]")) {
-    var D = window.DepthCoDatos;
-    D.cargar().then(function (cat) {
-      var L = cat.llaveros, LA = cat.lamparas;
-      var minimo = Math.min.apply(null, L.precios.map(function (p) { return p.unitario; }));
-      document.querySelector('[data-prod-meta="llaveros"]').textContent =
-        "Desde " + pesos(minimo) + " c/u · en el color que quieras";
-      var n = LA.modelos.length;
+  // Llaveros y lámparas en la portada: el precio más bajo por unidad (comprando por cantidad) y los modelos, del catálogo
+  if (window.DepthCoDatos && document.querySelector("[data-prod-precio]")) {
+    window.DepthCoDatos.cargar().then(function (cat) {
+      var tramos = cat.llaveros.precios.slice().sort(function (a, b) { return a.unitario - b.unitario; });
+      if (tramos.length) {
+        document.querySelector("[data-prod-precio]").textContent = pesos(tramos[0].unitario);
+        document.querySelector('[data-prod-meta="llaveros"]').textContent =
+          "Comprando " + tramos[0].desde + " o más · en el color que quieras";
+      }
+      var n = cat.lamparas.modelos.length;
       if (n) document.querySelector('[data-prod-meta="lamparas"]').textContent =
         n + (n === 1 ? " modelo" : " modelos") + " · de mesa y colgantes · en una sola pieza";
-      var fotoLl = (L.fotos || []).map(function (f) { return f.src; }).concat(L.modelos.map(function (m) { return m.foto; })).filter(function (u) { return D.url(u); })[0];
-      var fotoLa = LA.modelos.map(function (m) { return m.foto; }).filter(function (u) { return D.url(u); })[0];
-      [["llaveros", fotoLl], ["lamparas", fotoLa]].forEach(function (par) {
-        if (!par[1]) return;
-        var caja = document.querySelector('[data-prod-foto="' + par[0] + '"]');
-        caja.innerHTML = '<img src="' + esc(D.url(par[1])) + '" alt="" loading="lazy">';
-        caja.parentNode.classList.add("prod--foto");
-      });
     }).catch(function () { /* sin catálogo quedan los textos por defecto */ });
   }
 
@@ -103,7 +60,7 @@
       var n = cfg.NIVELES_DISENO[k];
       var extra = n.incluye ? "Incluye " + n.incluye + ". " : "";
       if (n.nota) extra += n.nota.charAt(0).toUpperCase() + n.nota.slice(1) + ". ";
-      return '<div class="level reveal">' +
+      return '<div class="level">' +
         '<div class="level__top"><h4>' + esc(n.nombre) + '</h4>' +
         '<span class="level__price"><small>desde</small>' + pesos(n.desde) + '</span></div>' +
         '<p>' + esc(n.ejemplos.charAt(0).toUpperCase() + n.ejemplos.slice(1)) + '.</p>' +
@@ -122,7 +79,7 @@
     var grupos = [["Estándar", "Estándar"], ["Técnico", "Técnicos"]];
     lista.innerHTML = grupos.map(function (g) {
       var items = cfg.MATERIALES.filter(function (m) { return m.grupo === g[0]; });
-      return '<div class="mgroup reveal"><h3>' + g[1] + '</h3><ul class="mlist">' +
+      return '<div class="mgroup build"><h3>' + g[1] + '</h3><ul class="mlist">' +
         items.map(function (m) {
           return '<li><strong>' + esc(m.nombre) + '</strong><span class="muso">' + esc(m.uso) + '</span>' +
             '<p>' + esc(m.cuando) + '</p></li>';
@@ -130,24 +87,9 @@
     }).join("");
   }
 
-  // Pestañas del cotizador (accesibles con teclado), con un indicador que se desliza a la pestaña activa
+  // Animación "se construye" capa por capa
+  // Pestañas del cotizador (accesibles con teclado)
   var tabs = Array.prototype.slice.call(document.querySelectorAll('.tabs [role="tab"]'));
-  var tira = document.querySelector(".tabs");
-  var tinta = null;
-  if (tira) {
-    tinta = document.createElement("span");
-    tinta.className = "tabs__ink";
-    tinta.setAttribute("aria-hidden", "true");
-    tira.appendChild(tinta);
-  }
-  function moverTinta() {
-    var t = tabs.filter(function (x) { return x.getAttribute("aria-selected") === "true"; })[0];
-    if (!tinta || !t) return;
-    tinta.style.width = t.offsetWidth + "px";
-    tinta.style.transform = "translate3d(" + t.offsetLeft + "px,0,0)";
-  }
-  window.addEventListener("resize", moverTinta);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(moverTinta);
   function activar(tab, foco) {
     tabs.forEach(function (t) {
       var sel = t === tab;
@@ -155,7 +97,6 @@
       t.tabIndex = sel ? 0 : -1;
       document.getElementById(t.getAttribute("aria-controls")).hidden = !sel;
     });
-    moverTinta();
     if (foco) tab.focus();
     document.dispatchEvent(new CustomEvent("depthco:tab", { detail: tab.id }));
   }
@@ -176,5 +117,4 @@
       if (t) activar(t);
     });
   });
-  moverTinta();
 })();
