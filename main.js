@@ -1,4 +1,4 @@
-/* DepthCo — interacción general de la página (menú, animaciones, contenido desde config.js). */
+/* DepthCo — interacción de la portada: menú, contenido desde config.js y el catálogo, pestañas del cotizador. */
 (function () {
   var cfg = window.DEPTHCO_CONFIG;
 
@@ -22,19 +22,41 @@
   // Menú mobile
   var toggle = document.querySelector(".nav-toggle");
   var nav = document.getElementById("nav");
-  toggle.addEventListener("click", function () {
-    var open = toggle.getAttribute("aria-expanded") === "true";
-    toggle.setAttribute("aria-expanded", String(!open));
-    toggle.setAttribute("aria-label", open ? "Abrir menú" : "Cerrar menú");
-    nav.classList.toggle("is-open", !open);
-  });
-  nav.addEventListener("click", function (e) {
-    if (e.target.tagName === "A") {
-      toggle.setAttribute("aria-expanded", "false");
-      toggle.setAttribute("aria-label", "Abrir menú");
-      nav.classList.remove("is-open");
-    }
-  });
+  function menu(abrir) {
+    toggle.setAttribute("aria-expanded", String(abrir));
+    toggle.setAttribute("aria-label", abrir ? "Cerrar menú" : "Abrir menú");
+    nav.classList.toggle("is-open", abrir);
+    document.documentElement.classList.toggle("menu-open", abrir);
+  }
+  toggle.addEventListener("click", function () { menu(toggle.getAttribute("aria-expanded") !== "true"); });
+  nav.addEventListener("click", function (e) { if (e.target.closest("a")) menu(false); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && nav.classList.contains("is-open")) { menu(false); toggle.focus(); } });
+
+  // Contador de materiales del hero: sale de config.js
+  var statMat = document.getElementById("stat-materiales");
+  if (statMat) { statMat.setAttribute("data-count", cfg.MATERIALES.length); statMat.textContent = cfg.MATERIALES.length; }
+
+  // Llaveros y lámparas: precio "desde", cantidad de modelos y foto, leídos del catálogo
+  if (window.DepthCoDatos && document.querySelector("[data-prod-meta]")) {
+    var D = window.DepthCoDatos;
+    D.cargar().then(function (cat) {
+      var L = cat.llaveros, LA = cat.lamparas;
+      var minimo = Math.min.apply(null, L.precios.map(function (p) { return p.unitario; }));
+      document.querySelector('[data-prod-meta="llaveros"]').textContent =
+        "Desde " + pesos(minimo) + " c/u · en el color que quieras";
+      var n = LA.modelos.length;
+      if (n) document.querySelector('[data-prod-meta="lamparas"]').textContent =
+        n + (n === 1 ? " modelo" : " modelos") + " · de mesa y colgantes · en una sola pieza";
+      var fotoLl = (L.fotos || []).map(function (f) { return f.src; }).concat(L.modelos.map(function (m) { return m.foto; })).filter(function (u) { return D.url(u); })[0];
+      var fotoLa = LA.modelos.map(function (m) { return m.foto; }).filter(function (u) { return D.url(u); })[0];
+      [["llaveros", fotoLl], ["lamparas", fotoLa]].forEach(function (par) {
+        if (!par[1]) return;
+        var caja = document.querySelector('[data-prod-foto="' + par[0] + '"]');
+        caja.innerHTML = '<img src="' + esc(D.url(par[1])) + '" alt="" loading="lazy">';
+        caja.parentNode.classList.add("prod--foto");
+      });
+    }).catch(function () { /* sin catálogo quedan los textos por defecto */ });
+  }
 
   // Niveles de diseño en Servicios
   var niveles = document.getElementById("niveles-servicio");
@@ -43,7 +65,7 @@
       var n = cfg.NIVELES_DISENO[k];
       var extra = n.incluye ? "Incluye " + n.incluye + ". " : "";
       if (n.nota) extra += n.nota.charAt(0).toUpperCase() + n.nota.slice(1) + ". ";
-      return '<div class="level">' +
+      return '<div class="level reveal">' +
         '<div class="level__top"><h4>' + esc(n.nombre) + '</h4>' +
         '<span class="level__price"><small>desde</small>' + pesos(n.desde) + '</span></div>' +
         '<p>' + esc(n.ejemplos.charAt(0).toUpperCase() + n.ejemplos.slice(1)) + '.</p>' +
@@ -62,7 +84,7 @@
     var grupos = [["Estándar", "Estándar"], ["Técnico", "Técnicos"]];
     lista.innerHTML = grupos.map(function (g) {
       var items = cfg.MATERIALES.filter(function (m) { return m.grupo === g[0]; });
-      return '<div class="mgroup build"><h3>' + g[1] + '</h3><ul class="mlist">' +
+      return '<div class="mgroup reveal"><h3>' + g[1] + '</h3><ul class="mlist">' +
         items.map(function (m) {
           return '<li><strong>' + esc(m.nombre) + '</strong><span class="muso">' + esc(m.uso) + '</span>' +
             '<p>' + esc(m.cuando) + '</p></li>';
@@ -70,9 +92,24 @@
     }).join("");
   }
 
-  // Animación "se construye" capa por capa
-  // Pestañas del cotizador (accesibles con teclado)
+  // Pestañas del cotizador (accesibles con teclado), con un indicador que se desliza a la pestaña activa
   var tabs = Array.prototype.slice.call(document.querySelectorAll('.tabs [role="tab"]'));
+  var tira = document.querySelector(".tabs");
+  var tinta = null;
+  if (tira) {
+    tinta = document.createElement("span");
+    tinta.className = "tabs__ink";
+    tinta.setAttribute("aria-hidden", "true");
+    tira.appendChild(tinta);
+  }
+  function moverTinta() {
+    var t = tabs.filter(function (x) { return x.getAttribute("aria-selected") === "true"; })[0];
+    if (!tinta || !t) return;
+    tinta.style.width = t.offsetWidth + "px";
+    tinta.style.transform = "translate3d(" + t.offsetLeft + "px,0,0)";
+  }
+  window.addEventListener("resize", moverTinta);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(moverTinta);
   function activar(tab, foco) {
     tabs.forEach(function (t) {
       var sel = t === tab;
@@ -80,6 +117,7 @@
       t.tabIndex = sel ? 0 : -1;
       document.getElementById(t.getAttribute("aria-controls")).hidden = !sel;
     });
+    moverTinta();
     if (foco) tab.focus();
     document.dispatchEvent(new CustomEvent("depthco:tab", { detail: tab.id }));
   }
@@ -100,4 +138,5 @@
       if (t) activar(t);
     });
   });
+  moverTinta();
 })();
