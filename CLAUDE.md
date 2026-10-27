@@ -33,9 +33,11 @@ Paleta "Óxido — marrón industrial" (definir como variables CSS en :root; aju
 --grafito: #2B2A28;  /* texto principal y secciones oscuras */
 ```
 - Marrón (nogal/óxido) es el color protagonista de la marca. Usar hueso como fondo general y alternar secciones en nogal o grafito para dar ritmo.
-- Motivo gráfico "capa por capa": líneas horizontales finas y paralelas (como capas de impresión) en separadores, fondos sutiles y en el hover de tarjetas. Animación de entrada de secciones de ARRIBA HACIA ABAJO, suave (solo opacity/transform, sin clip-path; ver animaciones.js), respetar prefers-reduced-motion.
+- Motivo gráfico "capa por capa": líneas horizontales finas y paralelas (como capas de impresión) en fondos sutiles, bandas y en el hover de tarjetas.
+- Rediseño (inspirado en la estética y animaciones de crosta, sin copiar paleta ni funciones): hero oscuro a pantalla completa, títulos de póster condensados en mayúsculas, banda en movimiento (marquee) en óxido con el símbolo, secciones numeradas (01, 02…), sección destacada de llaveros y lámparas en la portada, pie con el logo grande.
+- Movimiento en `motion.js` (sin librerías): intro con el símbolo (solo la primera visita de la sesión), títulos `[data-split]` palabra por palabra, `.reveal`/`.build` al entrar, `[data-scrub]` párrafos que se encienden, `[data-parallax]`, `[data-count]`, `.magnetic`, `[data-glow]`, `[data-nav]` (menú que se oculta al bajar). TODO entra de ARRIBA HACIA ABAJO, solo opacity/transform (nada de clip-path en bloques grandes ni backdrop-filter), respetar prefers-reduced-motion. El contenido siempre visible en reposo.
 - Logo: "Co anidado" (símbolo C con la o adentro + "Depth"), en color de la paleta, nunca en blanco y negro. Archivo en /img/logo.svg (o .png). Si todavía no está, dejar un placeholder de texto "DepthCo" en nogal y un TODO.
-- Tipografía: sans geométrica para títulos (ej. Space Grotesk o Archivo desde Google Fonts) + sans neutra para texto (ej. Inter). Números de precio grandes, en óxido.
+- Tipografía: Archivo (condensada, `font-stretch: 70–72%`, 800–900, mayúsculas) para títulos grandes y Archivo ancho normal para interfaz + Inter para texto. Números de precio grandes, en óxido.
 - Minimalista, industrial, cálido. Nada que parezca juguete o gimmick. Sin emojis. Fotos reales de piezas sobre fondo neutro.
 
 ## Stack técnico

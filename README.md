@@ -150,5 +150,5 @@ Si los gramos del cotizador se alejan mucho de los del slicer, ajustá `FACTOR_R
 | `cotizador-archivo.js` | Pestaña "Tengo el archivo": visor 3D (three.js por CDN), volumen STL/3MF |
 | `test/precios.test.js` | Chequeo contra el mercado y del catálogo |
 | `test/seguridad.test.js` | Chequeos de seguridad (CSP, integridad, secretos) |
-| `animaciones.js` | Animaciones de entrada y scroll arriba al cambiar de página |
+| `motion.js` | Sistema de movimiento: intro, títulos palabra por palabra, banda, parallax, botones magnéticos, menú que se oculta, scroll arriba al cambiar de página |
 | `CLAUDE.md` | Brief del proyecto para Claude |
