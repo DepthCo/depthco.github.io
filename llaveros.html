@@ -21,11 +21,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="llaveros.css">
+  <script src="motion.js"></script>
 </head>
 <body>
   <a class="skip" href="#main">Saltar al contenido</a>
 
-  <header class="top">
+  <header class="top" data-nav>
     <div class="wrap top__inner">
       <a class="top__logo" href="index.html" aria-label="DepthCo, inicio">
         <img src="img/logo-claro.svg" alt="DepthCo" width="144" height="40">
@@ -45,7 +46,7 @@
           <p class="kicker">Llaveros personalizados</p>
           <h1>Tu nombre, tu logo, tu marca.<br><span>En un llavero.</span></h1>
           <p class="hero__lead">Impresos en 3D, en el color que quieras. Con tu nombre, con tu logo, del catálogo o con la idea que tengas. Mirá el precio al instante, desde una unidad.</p>
-          <a class="pill pill--light" href="#disenar">Diseñá el tuyo</a>
+          <a class="pill pill--light magnetic" href="#disenar">Diseñá el tuyo</a>
         </div>
       </div>
     </section>
@@ -56,9 +57,9 @@
 
     <section id="disenar" class="studio">
       <div class="wrap">
-        <header class="head build">
-          <p class="kicker kicker--dark">Armá tu pedido</p>
-          <h2>Con tu nombre, tu logo, del catálogo o con tu idea</h2>
+        <header class="head">
+          <p class="reveal kicker kicker--dark">Armá tu pedido</p>
+          <h2 data-split>Con tu nombre, tu logo, del catálogo o con tu idea</h2>
         </header>
         <p class="studio__error" id="ll-error" hidden>No pudimos cargar el catálogo. Escribinos por WhatsApp y te pasamos opciones y precios.</p>
         <form class="studio__grid" id="form-llavero" novalidate>
@@ -134,7 +135,7 @@
                 <strong id="ll-logo-precio"></strong>
               </div>
               <p class="ticket__alert" id="ll-alerta" hidden></p>
-              <a class="pill pill--wa" id="ll-wa" href="#" target="_blank" rel="noopener">
+              <a class="pill pill--wa magnetic" id="ll-wa" href="#" target="_blank" rel="noopener">
                 <svg viewBox="0 0 32 32" width="20" height="20" aria-hidden="true" focusable="false"><use href="#ico-wa"/></svg>
                 Pedir por WhatsApp
               </a>
@@ -147,9 +148,9 @@
 
     <section class="tiers">
       <div class="wrap">
-        <header class="head build">
-          <p class="kicker">Precio por cantidad</p>
-          <h2>Cuantos más, más baratos</h2>
+        <header class="head">
+          <p class="reveal kicker">Precio por cantidad</p>
+          <h2 data-split>Cuantos más, más baratos</h2>
         </header>
         <ol class="tiers__list" id="ll-tiers"></ol>
       </div>
@@ -157,9 +158,9 @@
 
     <section class="uses">
       <div class="wrap">
-        <header class="head build">
-          <p class="kicker kicker--dark">Para quién</p>
-          <h2>Uno o trescientos</h2>
+        <header class="head">
+          <p class="reveal kicker kicker--dark">Para quién</p>
+          <h2 data-split>Uno o trescientos</h2>
         </header>
         <div class="uses__grid" id="ll-usos"></div>
       </div>
@@ -167,9 +168,9 @@
 
     <section class="how">
       <div class="wrap">
-        <header class="head build">
-          <p class="kicker kicker--dark">Cómo se pide</p>
-          <h2>En tres pasos</h2>
+        <header class="head">
+          <p class="reveal kicker kicker--dark">Cómo se pide</p>
+          <h2 data-split>En tres pasos</h2>
         </header>
         <ol class="how__steps build">
           <li><strong>Diseñalo arriba</strong><span>Texto o logo, forma, colores y cantidad. El precio se actualiza solo.</span></li>
@@ -194,7 +195,6 @@
     <symbol id="ico-wa" viewBox="0 0 32 32"><path fill="currentColor" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.8 2 6.8L3 29l6.6-2c1.9 1 4.1 1.6 6.4 1.6 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.3c-2 0-4-.6-5.7-1.6l-.4-.2-3.9 1.2 1.2-3.8-.3-.4c-1.2-1.7-1.8-3.7-1.8-5.7C5.1 9.9 10 5.2 16 5.2s10.9 4.7 10.9 10.6S22 26.3 16 26.3zm6-7.9c-.3-.2-1.9-1-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.6.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.4c.2.2 2.4 3.6 5.8 5 .8.3 1.4.5 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.7-.5z"/></symbol>
   </svg>
 
-  <script src="animaciones.js"></script>
   <script src="config.js"></script>
   <script src="catalogo-datos.js"></script>
   <script src="llaveros.js"></script>
