@@ -83,14 +83,30 @@
       return v;
     }
 
+    // Tramos de precio: primero el más barato (comprando más), como "desde $X"
     function dibujarTramos(activo) {
+      var base = L.precios[0] ? L.precios[0].unitario : 0;
+      var barato = L.precios.reduce(function (m, p) { return !m || p.unitario < m.unitario ? p : m; }, null);
       $("ll-tiers").innerHTML = L.precios.map(function (p, i) {
         var sig = L.precios[i + 1];
-        var rango = sig ? (p.desde === sig.desde - 1 ? p.desde : p.desde + " a " + (sig.desde - 1)) + " u." : p.desde + " u. o más";
-        return '<li class="tier' + (p === activo ? " is-active" : "") + '"><span class="tier__qty">' + rango + '</span>' +
-          '<span class="tier__price">' + pesos(p.unitario) + '</span><span class="tier__unit">por llavero</span></li>';
-      }).join("");
+        var rango = sig ? (p.desde === sig.desde - 1 ? p.desde : p.desde + " a " + (sig.desde - 1)) + " unidades" : p.desde + " o más";
+        var ahorro = base > p.unitario ? Math.round((1 - p.unitario / base) * 100) : 0;
+        return '<li class="tier' + (p === activo ? " is-active" : "") + (p === barato ? " tier--mejor" : "") + '">' +
+          (p === barato ? '<span class="tier__badge">Mejor precio</span>' : "") +
+          '<span class="tier__qty">' + rango + '</span>' +
+          '<span class="tier__price">' + pesos(p.unitario) + '</span><span class="tier__unit">por llavero' + (ahorro ? " · " + ahorro + "% menos" : "") + '</span></li>';
+      }).reverse().join("");
     }
+
+    // Hero: el precio más bajo por unidad
+    (function () {
+      var barato = L.precios.reduce(function (m, p) { return !m || p.unitario < m.unitario ? p : m; }, null);
+      if (!barato) return;
+      $("ll-desde").textContent = pesos(barato.unitario);
+      $("ll-desde-nota").textContent = barato.desde > 1
+        ? "Comprando " + barato.desde + " o más. También hacemos de a uno."
+        : "Precio por unidad, desde un llavero.";
+    })();
 
     /* ---------- Cálculo y mensaje ---------- */
     function actualizar() {

@@ -82,7 +82,15 @@ a { color: var(--oxido); }
   display: inline-block; margin-top: .14em; padding: .02em .2em .1em; border-radius: 16px;
   background: var(--grafito); color: var(--hueso);
 }
-.hero__lead { font-size: 1.12rem; max-width: 46ch; margin: 22px 0 30px; color: #fff; }
+.hero__lead { font-size: 1.12rem; max-width: 46ch; margin: 0 0 30px; color: #fff; }
+/* Precio "desde": el más bajo por unidad, grande, como gancho */
+.hero__precio { display: flex; align-items: baseline; gap: 8px; margin: 26px 0 4px; }
+.hero__precio strong { font-family: var(--f-display); font-weight: 800; font-size: clamp(3.6rem, 13vw, 6.4rem); line-height: .95; letter-spacing: -0.04em; color: #fff; }
+.hero__precio small { font-family: var(--f-display); font-weight: 700; font-size: clamp(1.1rem, 3vw, 1.5rem); color: var(--hueso); }
+.hero__precio-nota { display: inline-block; margin: 0 0 22px; padding: 6px 14px; border-radius: 999px; background: var(--grafito); color: var(--hueso); font-weight: 600; font-size: .92rem; }
+.hero__ctas { display: flex; flex-wrap: wrap; gap: 10px; }
+.pill--line { background: transparent; color: #fff; box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .6); }
+.pill--line:hover { color: #fff; box-shadow: inset 0 0 0 2px #fff; }
 @media (min-width: 900px) { .hero { padding: 80px 0 104px; } }
 
 /* ---------- Fotos reales (solo aparece si hay fotos en catalogo.js) ---------- */
@@ -160,10 +168,14 @@ input:disabled { opacity: .45; }
 .tiers .kicker { background: var(--oxido); color: #fff; }
 .tiers__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(2, 1fr); }
 @media (min-width: 760px) { .tiers__list { grid-template-columns: repeat(4, 1fr); } }
+.tiers__lead { max-width: 52ch; margin: 8px 0 28px; color: #E5DDD0; }
 .tier {
-  background: rgba(237, 230, 218, .07); border: 2px solid var(--linea-clara); border-radius: var(--r-md);
-  padding: 20px 18px; display: grid; gap: 4px;
+  position: relative; background: rgba(237, 230, 218, .07); border: 2px solid var(--linea-clara); border-radius: var(--r-md);
+  padding: 20px 18px; display: grid; gap: 4px; align-content: start;
 }
+.tier--mejor { background: var(--oxido); border-color: var(--oxido); color: #fff; }
+.tier--mejor .tier__price { color: #fff; font-size: clamp(2rem, 6vw, 2.8rem); }
+.tier__badge { justify-self: start; margin-bottom: 6px; padding: 3px 10px; border-radius: 999px; background: var(--hueso); color: var(--nogal); font-weight: 700; font-size: .74rem; letter-spacing: .04em; text-transform: uppercase; }
 .tier.is-active { background: var(--hueso); border-color: var(--hueso); color: var(--nogal); }
 .tier__qty { font-weight: 600; font-size: .92rem; }
 .tier__price { font-family: var(--f-display); font-weight: 800; font-size: clamp(1.6rem, 5vw, 2.2rem); line-height: 1.1; color: #F0A27A; }
