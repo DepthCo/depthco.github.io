@@ -48,7 +48,7 @@ check(conSecretos.length === 0, "Ningún token ni clave en el repositorio" + (co
 check(!/[\w.]+@gmail\.com/.test(index), "El mail no aparece escrito en el HTML (los bots no lo pueden leer)");
 
 console.log("Compatibilidad con la política de seguridad:");
-const propios = ["main.js", "animaciones.js", "pricing.js", "cotizador-foto.js", "cotizador-archivo.js", "catalogo-datos.js", "llaveros.js", "lamparas.js", "admin.js"];
+const propios = ["main.js", "motion.js", "pricing.js", "cotizador-foto.js", "cotizador-archivo.js", "catalogo-datos.js", "llaveros.js", "lamparas.js", "admin.js"];
 const conEval = propios.filter((f) => /\beval\s*\(|new Function\s*\(|set(Timeout|Interval)\s*\(\s*["'`]/.test(leer(f)));
 check(conEval.length === 0, "Ningún script ejecuta texto como código (la CSP lo bloquearía)" + (conEval.length ? ": " + conEval.join(", ") : ""));
 const cfgTxt = leer("config.js");
