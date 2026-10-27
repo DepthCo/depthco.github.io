@@ -39,7 +39,7 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Fraunces:ital,opsz,wght@1,9..144,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script src="motion.js"></script>
   <script type="importmap">
@@ -63,6 +63,13 @@
   <a class="skip" href="#main">Saltar al contenido</a>
 
   <header class="topbar" data-nav>
+    <nav class="mundos" aria-label="Qué hacemos">
+      <div class="wrap mundos__inner">
+        <a href="index.html" aria-current="page">Repuestos</a>
+        <a href="llaveros.html" class="mundos__ll">Llaveros <small>desde <span data-prod-precio>$1.300</span></small></a>
+        <a href="lamparas.html" class="mundos__la">Lámparas</a>
+      </div>
+    </nav>
     <div class="wrap topbar__inner">
       <a class="brand" href="#inicio" aria-label="DepthCo, inicio">
         <img src="img/logo.svg" alt="DepthCo" width="144" height="40">
@@ -76,7 +83,6 @@
         <a href="#cotizador">Cotizador</a>
         <a href="#materiales">Materiales</a>
         <a href="#faq">Preguntas</a>
-        <a href="#productos">Llaveros y lámparas</a>
         <a href="#contacto" class="nav__cta">Contacto</a>
       </nav>
     </div>
@@ -141,31 +147,6 @@
             <h3>Multicolor</h3>
             <p>Hasta 4 colores en una misma pieza: señalética, perillas con indicaciones, piezas de identificación.</p>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- PRODUCTOS: LLAVEROS Y LÁMPARAS -->
-    <section id="productos" class="section section--alt">
-      <div class="wrap">
-        <header class="section__head">
-          <p class="eyebrow">Productos</p>
-          <h2 data-split>Además de repuestos, objetos para todos los días</h2>
-        </header>
-        <div class="prods">
-          <a class="prod prod--llaveros build" href="llaveros.html">
-            <span class="prod__tag">Llaveros personalizados</span>
-            <span class="prod__precio"><small>desde</small> <strong data-prod-precio>$1.300</strong> <small>c/u</small></span>
-            <span class="prod__title">Con tu nombre, tu logo o tu idea</span>
-            <span class="prod__meta" data-prod-meta="llaveros">Comprando por cantidad · en el color que quieras</span>
-            <span class="prod__cta">Diseñá el tuyo →</span>
-          </a>
-          <a class="prod prod--lamparas build" href="lamparas.html">
-            <span class="prod__tag">Lámparas</span>
-            <span class="prod__title">Luz que se construye capa por capa</span>
-            <span class="prod__meta" data-prod-meta="lamparas">De mesa y colgantes · en una sola pieza</span>
-            <span class="prod__cta">Ver la colección →</span>
-          </a>
         </div>
       </div>
     </section>

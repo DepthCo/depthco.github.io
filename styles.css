@@ -274,33 +274,23 @@ html.splash body::after {
   [data-scrub] .sw { opacity: 1 !important; }
 }
 
-/* ---------- Productos: llaveros y lámparas ---------- */
-.prods { display: grid; gap: 16px; }
-@media (min-width: 860px) { .prods { grid-template-columns: 1fr 1fr; gap: 20px; } }
-.prod {
-  position: relative; overflow: hidden; isolation: isolate;
-  display: flex; flex-direction: column; justify-content: flex-end; gap: 12px;
-  min-height: 380px; padding: 28px 24px; border-radius: 10px; text-decoration: none;
-  transition: transform .7s var(--ease);
+/* ---------- Mundos: repuestos, llaveros y lámparas como tres líneas de la marca ---------- */
+.mundos { background: var(--grafito); }
+.mundos__inner { display: flex; gap: 4px; padding-top: 6px; padding-bottom: 6px; overflow-x: auto; scrollbar-width: none; }
+.mundos__inner::-webkit-scrollbar { display: none; }
+.mundos a {
+  flex: none; display: inline-flex; align-items: baseline; gap: 6px;
+  padding: 6px 14px; border-radius: 999px; text-decoration: none; white-space: nowrap;
+  font-family: var(--f-titulo); font-weight: 600; font-size: .88rem; color: var(--hueso);
+  transition: background-color .25s, color .25s;
 }
-.prod:hover { transform: translate3d(0, -6px, 0); }
-.prod::before {
-  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background: repeating-linear-gradient(to bottom, rgba(255, 255, 255, .07) 0 1px, transparent 1px 9px);
-  transform: scaleY(0); transform-origin: top; transition: transform .8s var(--ease);
-}
-.prod:hover::before { transform: scaleY(1); }
-.prod--llaveros { background: var(--oxido); color: #fff; }
-.prod--lamparas { background: var(--grafito); color: var(--hueso); }
-.prod__tag { font-family: var(--f-titulo); font-weight: 600; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; opacity: .9; }
-.prod__precio { display: flex; align-items: baseline; gap: 6px; margin-top: auto; }
-.prod__precio strong { font-family: var(--f-titulo); font-weight: 700; font-size: clamp(3rem, 8vw, 4.6rem); line-height: 1; letter-spacing: -0.03em; }
-.prod__precio small { font-size: 1rem; opacity: .9; }
-.prod__title { display: block; max-width: 16ch; }
-.prod--llaveros .prod__title { font-family: "Bricolage Grotesque", var(--f-titulo), sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3.6vw, 2.6rem); line-height: 1; letter-spacing: -0.03em; }
-.prod--lamparas .prod__title { font-family: "Fraunces", Georgia, serif; font-style: italic; font-weight: 300; font-size: clamp(2.2rem, 4.4vw, 3.4rem); line-height: 1.02; }
-.prod__meta { font-size: .95rem; opacity: .92; }
-.prod__cta { align-self: flex-start; font-family: var(--f-titulo); font-weight: 700; border-bottom: 1.5px solid currentColor; padding-bottom: 3px; }
+.mundos a small { font-family: var(--f-texto); font-weight: 500; font-size: .76rem; color: #E9A47F; }
+.mundos a:hover { background: rgba(237, 230, 218, .1); color: var(--hueso); }
+.mundos a[aria-current="page"] { background: var(--hueso); color: var(--nogal); }
+.mundos .mundos__ll:hover { background: var(--oxido); color: #fff; }
+.mundos .mundos__ll:hover small { color: #fff; }
+.mundos .mundos__la:hover { background: var(--nogal); }
+@media (max-width: 380px) { .mundos a { padding: 6px 10px; font-size: .82rem; } }
 
 /* ---------- Servicios ---------- */
 .feature {

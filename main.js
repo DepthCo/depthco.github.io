@@ -38,18 +38,13 @@
     }
   });
 
-  // Llaveros y lámparas en la portada: el precio más bajo por unidad (comprando por cantidad) y los modelos, del catálogo
+  // Llaveros en la barra de arriba: el precio más bajo por unidad (comprando por cantidad), del catálogo
   if (window.DepthCoDatos && document.querySelector("[data-prod-precio]")) {
     window.DepthCoDatos.cargar().then(function (cat) {
       var tramos = cat.llaveros.precios.slice().sort(function (a, b) { return a.unitario - b.unitario; });
       if (tramos.length) {
         document.querySelector("[data-prod-precio]").textContent = pesos(tramos[0].unitario);
-        document.querySelector('[data-prod-meta="llaveros"]').textContent =
-          "Comprando " + tramos[0].desde + " o más · en el color que quieras";
       }
-      var n = cat.lamparas.modelos.length;
-      if (n) document.querySelector('[data-prod-meta="lamparas"]').textContent =
-        n + (n === 1 ? " modelo" : " modelos") + " · de mesa y colgantes · en una sola pieza";
     }).catch(function () { /* sin catálogo quedan los textos por defecto */ });
   }
 
