@@ -36,6 +36,44 @@
   var statMat = document.getElementById("stat-materiales");
   if (statMat) { statMat.setAttribute("data-count", cfg.MATERIALES.length); statMat.textContent = cfg.MATERIALES.length; }
 
+  // Hero: cotizaciones de ejemplo calculadas con la misma fórmula del cotizador (config.js)
+  var ticket = document.querySelector(".ticket");
+  if (ticket && window.DepthCoPricing) {
+    var ejemplos = [
+      { pieza: "Engranaje de repuesto", material: "petg", gramos: 40 },
+      { pieza: "Soporte de motor", material: "pla", gramos: 80 },
+      { pieza: "Buje de desgaste", material: "pa6", gramos: 30 },
+      { pieza: "Carcasa de comando", material: "petg", gramos: 120 }
+    ].filter(function (e) { return cfg.MATERIALES.some(function (m) { return m.id === e.material; }); });
+    var campos = {};
+    ticket.querySelectorAll("[data-ticket]").forEach(function (el) { campos[el.getAttribute("data-ticket")] = el; });
+    var actual = 0, pausa = false;
+    function mostrar(i) {
+      var e = ejemplos[i];
+      if (!e) return;
+      var c = DepthCoPricing.cotizarImpresion(cfg, { gramos: e.gramos, material: e.material, cantidad: 1, urgente: false });
+      var min = Math.round(c.horas * 60);
+      campos.pieza.textContent = e.pieza;
+      campos.material.textContent = cfg.MATERIALES.filter(function (m) { return m.id === e.material; })[0].nombre;
+      campos.gramos.textContent = e.gramos + " g";
+      campos.horas.textContent = ((min >= 60 ? Math.floor(min / 60) + " h " : "") + (min % 60 ? (min % 60) + " min" : "")).trim();
+      campos.total.textContent = pesos(c.total);
+      ticket.classList.remove("is-printing");
+      void ticket.offsetWidth; // reinicia la animación de capas
+      ticket.classList.add("is-printing");
+    }
+    mostrar(0);
+    ticket.addEventListener("pointerenter", function () { pausa = true; });
+    ticket.addEventListener("pointerleave", function () { pausa = false; });
+    if (ejemplos.length > 1 && document.documentElement.classList.contains("motion")) {
+      setInterval(function () {
+        if (pausa || document.hidden || ticket.getBoundingClientRect().bottom < 0) return;
+        actual = (actual + 1) % ejemplos.length;
+        mostrar(actual);
+      }, 5200);
+    }
+  }
+
   // Llaveros y lámparas: precio "desde", cantidad de modelos y foto, leídos del catálogo
   if (window.DepthCoDatos && document.querySelector("[data-prod-meta]")) {
     var D = window.DepthCoDatos;

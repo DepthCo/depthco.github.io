@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es-AR" data-splash>
+<html lang="es-AR">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -65,71 +65,81 @@
   <header class="topbar" data-nav>
     <div class="wrap topbar__inner">
       <a class="brand" href="#inicio" aria-label="DepthCo, inicio">
-        <img class="brand__claro" src="img/logo-claro.svg" alt="DepthCo" width="144" height="40">
-        <img class="brand__oscuro" src="img/logo.svg" alt="" width="144" height="40">
+        <img src="img/logo.svg" alt="DepthCo" width="144" height="40">
       </a>
       <nav id="nav" class="nav" aria-label="Principal">
-        <a href="#servicios"><small>01</small>Servicios</a>
-        <a href="#productos" class="nav__prod"><small>02</small>Llaveros y lámparas</a>
-        <a href="#como-trabajamos"><small>03</small>Cómo trabajamos</a>
-        <a href="#cotizador"><small>04</small>Cotizador</a>
-        <a href="#materiales"><small>05</small>Materiales</a>
-        <a href="#faq"><small>06</small>Preguntas</a>
-        <a href="#contacto"><small>07</small>Contacto</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#productos" class="nav__prod">Llaveros y lámparas</a>
+        <a href="#como-trabajamos">Cómo trabajamos</a>
+        <a href="#cotizador">Cotizador</a>
+        <a href="#materiales">Materiales</a>
+        <a href="#faq">Preguntas</a>
+        <a href="#contacto">Contacto</a>
       </nav>
-      <a class="btn btn--primary btn--sm magnetic topbar__cta" href="#cotizador" data-tab="foto">Cotizá</a>
+      <a class="btn btn--primary btn--sm topbar__cta" href="#cotizador" data-tab="foto">Cotizá</a>
       <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">
-        <span></span><span></span>
+        <span></span><span></span><span></span>
       </button>
     </div>
+    <span class="topbar__progress" data-page-progress aria-hidden="true"></span>
   </header>
 
   <main id="main">
     <!-- HERO -->
-    <section id="inicio" class="hero" data-hero data-glow>
-      <div class="glow" aria-hidden="true"></div>
-      <div class="hero__layers" aria-hidden="true" data-parallax="-12"></div>
-      <div class="grain" aria-hidden="true"></div>
+    <section id="inicio" class="hero" data-hero>
       <div class="wrap hero__inner">
-        <p class="kicker hero__kicker hero-in"><span class="dot" aria-hidden="true"></span>Precio al instante · Impresión 3D en San Isidro</p>
-        <h1 class="hero__title" aria-label="Tu repuesto discontinuado, fabricado en días.">
-          <span class="ht-line" aria-hidden="true"><span class="ht-in" style="--l:0">Tu repuesto</span></span>
-          <span class="ht-line" aria-hidden="true"><span class="ht-in" style="--l:1">discontinuado,</span></span>
-          <span class="ht-line" aria-hidden="true"><span class="ht-in" style="--l:2"><em>fabricado en días.</em></span></span>
-        </h1>
-        <div class="hero__foot">
-          <p class="hero__lead hero-in"><strong>Solo necesitamos una foto.</strong> ¿No tenés el archivo? No importa: relevamos la pieza, la modelamos y la imprimimos en el material que necesita. Mientras otros responden "precio a convenir", acá ves tu precio estimado ahora.</p>
+        <div class="hero__copy">
+          <p class="label hero-in">Impresión 3D · San Isidro, Zona Norte</p>
+          <h1 class="hero__title hero-in">Tu repuesto discontinuado, <em>fabricado en días.</em></h1>
+          <p class="hero__lead hero-in"><strong>Solo necesitamos una foto.</strong> ¿No tenés el archivo? No importa: relevamos la pieza, la modelamos y la imprimimos en el material que necesita.</p>
           <div class="hero__actions hero-in">
-            <a class="btn btn--primary magnetic" href="#cotizador" data-tab="foto">Cotizá con una foto <span class="btn-arrow" aria-hidden="true">→</span></a>
-            <a class="btn btn--line magnetic" href="#cotizador" data-tab="archivo">Tengo el archivo</a>
+            <a class="btn btn--primary" href="#cotizador" data-tab="foto">Cotizá con una foto <span class="btn-arrow" aria-hidden="true">→</span></a>
+            <a class="btn btn--ghost" href="#cotizador" data-tab="archivo">Tengo el archivo</a>
           </div>
         </div>
-        <dl class="hero__stats hero-in">
-          <div><dt><span data-count="256">256</span> mm</dt><dd>de volumen por pieza</dd></div>
-          <div><dt><span data-count="9" id="stat-materiales">9</span></dt><dd>materiales, estándar y técnicos</dd></div>
-          <div><dt><span data-count="4">4</span></dt><dd>colores en una misma pieza</dd></div>
-        </dl>
+
+        <aside class="ticket hero-in" aria-label="Ejemplo de cotización al instante">
+          <div class="ticket__head">
+            <span>Cotización</span>
+            <span class="ticket__live"><i aria-hidden="true"></i>Al instante</span>
+          </div>
+          <div class="ticket__stack" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <p class="ticket__pieza" data-ticket="pieza">Engranaje de repuesto</p>
+          <dl class="ticket__datos">
+            <div><dt>Material</dt><dd data-ticket="material">PETG</dd></div>
+            <div><dt>Peso</dt><dd data-ticket="gramos">40 g</dd></div>
+            <div><dt>Máquina</dt><dd data-ticket="horas">2 h</dd></div>
+          </dl>
+          <p class="ticket__total"><span>Impresión</span><strong data-ticket="total">$6.600</strong></p>
+          <p class="ticket__nota">Lo que la competencia responde en 24&nbsp;h hábiles, o con "precio a convenir", acá lo ves ahora.</p>
+        </aside>
       </div>
-      <a class="hero__scroll" href="#servicios" aria-label="Bajar a Servicios"><span>Bajá</span><i aria-hidden="true"></i></a>
     </section>
 
-    <!-- BANDA -->
-    <div class="band" aria-hidden="true">
-      <div class="marquee"><div class="marquee__track"><span>Repuestos a medida</span><img src="img/simbolo-claro.svg" alt="" width="40" height="45"><span>Llaveros personalizados</span><img src="img/simbolo-claro.svg" alt="" width="40" height="45"><span>Lámparas</span><img src="img/simbolo-claro.svg" alt="" width="40" height="45"><span>Relevamiento desde una foto</span><img src="img/simbolo-claro.svg" alt="" width="40" height="45"><span>Prototipos</span><img src="img/simbolo-claro.svg" alt="" width="40" height="45"><span>Series cortas</span><img src="img/simbolo-claro.svg" alt="" width="40" height="45"><span>Multicolor</span><img src="img/simbolo-claro.svg" alt="" width="40" height="45"><span>Precio al instante</span><img src="img/simbolo-claro.svg" alt="" width="40" height="45"><span>Repuestos a medida</span><img src="img/simbolo-claro.svg" alt="" width="40" height="45"><span>Llaveros personalizados</span><img src="img/simbolo-claro.svg" alt="" width="40" height="45"><span>Lámparas</span><img src="img/simbolo-claro.svg" alt="" width="40" height="45"><span>Relevamiento desde una foto</span><img src="img/simbolo-claro.svg" alt="" width="40" height="45"><span>Prototipos</span><img src="img/simbolo-claro.svg" alt="" width="40" height="45"><span>Series cortas</span><img src="img/simbolo-claro.svg" alt="" width="40" height="45"><span>Multicolor</span><img src="img/simbolo-claro.svg" alt="" width="40" height="45"><span>Precio al instante</span><img src="img/simbolo-claro.svg" alt="" width="40" height="45"></div></div>
-    </div>
+    <!-- FICHA DE LA MÁQUINA -->
+    <section class="specs" aria-label="Capacidad">
+      <div class="wrap">
+        <dl class="specs__grid">
+          <div class="reveal"><dt><span data-count="256">256</span><small>mm</small></dt><dd>por lado, volumen máximo de pieza</dd></div>
+          <div class="reveal"><dt><span data-count="350">350</span><small>°C</small></dt><dd>boquilla endurecida para técnicos</dd></div>
+          <div class="reveal"><dt><span data-count="9" id="stat-materiales">9</span></dt><dd>materiales, estándar y técnicos</dd></div>
+          <div class="reveal"><dt><span data-count="4">4</span></dt><dd>colores en una misma pieza</dd></div>
+        </dl>
+      </div>
+    </section>
 
     <!-- 01. SERVICIOS -->
     <section id="servicios" class="section">
       <div class="wrap">
-        <header class="section__head">
-          <p class="kicker reveal"><span class="kn">01</span> Servicios</p>
-          <h2 class="h2" data-split>Fabricamos la pieza que <em>ya no se consigue.</em></h2>
-          <p class="section__scrub" data-scrub>Traés o mandás la pieza rota o discontinuada, o fotos con medidas. La medimos, la modelamos en CAD, imprimimos una prueba de encaje y entregamos el repuesto. Si el original fallaba, te ofrecemos una versión mejorada: material técnico y refuerzos donde se rompía.</p>
+        <header class="section__head head">
+          <p class="label">Servicios</p>
+          <h2 class="h2">Fabricamos la pieza que <em>ya no se consigue.</em></h2>
+          <p class="section__intro">Traés o mandás la pieza rota o discontinuada, o fotos con medidas. La medimos, la modelamos en CAD, imprimimos una prueba de encaje y entregamos el repuesto. Si el original fallaba, te ofrecemos una versión mejorada: material técnico y refuerzos donde se rompía.</p>
         </header>
 
         <article class="feature reveal">
           <div class="feature__intro">
-            <p class="kicker kicker--light">Servicio principal</p>
+            <p class="label label--light">Servicio principal</p>
             <h3>Repuestos a medida y relevamiento</h3>
             <p class="claim">"Un repuesto discontinuado no vale lo que pesa: vale la máquina que vuelve a funcionar."</p>
           </div>
@@ -168,30 +178,28 @@
     <!-- 02. PRODUCTOS: LLAVEROS Y LÁMPARAS -->
     <section id="productos" class="section section--productos">
       <div class="wrap">
-        <header class="section__head section__head--row">
+        <header class="section__head section__head--row head">
           <div>
-            <p class="kicker reveal"><span class="kn">02</span> Productos</p>
-            <h2 class="h2" data-split>Además de repuestos, <em>objetos para todos los días.</em></h2>
+            <p class="label">Productos</p>
+            <h2 class="h2">Además de repuestos, <em>objetos para todos los días.</em></h2>
           </div>
-          <p class="section__lead reveal">Llaveros personalizados y lámparas impresas capa por capa, hechos en San Isidro con la misma máquina y el mismo cuidado que un repuesto.</p>
+          <p class="section__lead">Llaveros personalizados y lámparas impresas capa por capa, hechos en San Isidro con la misma máquina y el mismo cuidado que un repuesto.</p>
         </header>
         <div class="prods">
-          <a class="prod prod--llaveros reveal" href="llaveros.html" data-glow>
-            <span class="glow" aria-hidden="true"></span>
-            <span class="prod__bg" aria-hidden="true">Llaveros</span>
+          <a class="prod prod--llaveros reveal" href="llaveros.html">
             <span class="prod__media" data-prod-foto="llaveros" aria-hidden="true"></span>
             <span class="prod__tag">Llaveros personalizados</span>
             <span class="prod__title">Con tu nombre, tu logo o tu idea.</span>
             <span class="prod__meta" data-prod-meta="llaveros">En el color que quieras · desde una unidad</span>
+            <span class="prod__tags"><b>Nombre</b><b>Logo</b><b>Catálogo</b><b>Tu idea</b></span>
             <span class="prod__cta">Diseñá el tuyo <i aria-hidden="true">→</i></span>
           </a>
-          <a class="prod prod--lamparas reveal" href="lamparas.html" data-glow>
-            <span class="glow" aria-hidden="true"></span>
-            <span class="prod__bg" aria-hidden="true">Lámparas</span>
+          <a class="prod prod--lamparas reveal" href="lamparas.html">
             <span class="prod__media" data-prod-foto="lamparas" aria-hidden="true"></span>
             <span class="prod__tag">Lámparas</span>
             <span class="prod__title">Luz que se construye capa por capa.</span>
             <span class="prod__meta" data-prod-meta="lamparas">De mesa y colgantes · en una sola pieza</span>
+            <span class="prod__tags"><b>De mesa</b><b>Colgantes</b><b>Una sola pieza</b></span>
             <span class="prod__cta">Ver la colección <i aria-hidden="true">→</i></span>
           </a>
         </div>
@@ -200,32 +208,30 @@
 
     <!-- 03. CÓMO TRABAJAMOS -->
     <section id="como-trabajamos" class="section section--dark">
-      <div class="grain" aria-hidden="true"></div>
       <div class="wrap">
-        <header class="section__head">
-          <p class="kicker kicker--light reveal"><span class="kn">03</span> Cómo trabajamos</p>
-          <h2 class="h2" data-split>Capa por capa, <em>de la foto al repuesto.</em></h2>
-          <p class="section__lead reveal">¿No tenés el archivo? No importa. Mandanos una foto y nosotros relevamos la pieza.</p>
+        <header class="section__head head">
+          <p class="label label--light">Cómo trabajamos</p>
+          <h2 class="h2">Capa por capa, <em>de la foto al repuesto.</em></h2>
+          <p class="section__lead">¿No tenés el archivo? No importa. Mandanos una foto y nosotros relevamos la pieza.</p>
         </header>
-        <div class="steps-track" aria-hidden="true"><span data-progress></span></div>
         <ol class="steps">
           <li class="step reveal">
-            <span class="step__n">01</span>
+            <span class="step__layers" aria-hidden="true"><i></i></span><span class="step__n">Paso 1 de 4</span>
             <h3>Mandás fotos o la pieza</h3>
             <p>Por WhatsApp, o la traés a San Isidro. También sirve un plano o un croquis con medidas.</p>
           </li>
           <li class="step reveal">
-            <span class="step__n">02</span>
+            <span class="step__layers" aria-hidden="true"><i></i><i></i></span><span class="step__n">Paso 2 de 4</span>
             <h3>Relevamos y modelamos</h3>
             <p>Medimos y la dibujamos en CAD. Te confirmamos precio final y plazo antes de imprimir.</p>
           </li>
           <li class="step reveal">
-            <span class="step__n">03</span>
+            <span class="step__layers" aria-hidden="true"><i></i><i></i><i></i></span><span class="step__n">Paso 3 de 4</span>
             <h3>Prueba de encaje</h3>
             <p>Imprimimos una muestra para verificar que calce en su lugar. Incluida en piezas de nivel medio.</p>
           </li>
           <li class="step reveal">
-            <span class="step__n">04</span>
+            <span class="step__layers" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="step__n">Paso 4 de 4</span>
             <h3>Repuesto final</h3>
             <p>Lo fabricamos en el material definitivo. El archivo queda guardado para la próxima.</p>
           </li>
@@ -236,10 +242,10 @@
     <!-- 04. COTIZADOR -->
     <section id="cotizador" class="section section--quote">
       <div class="wrap">
-        <header class="section__head">
-          <p class="kicker reveal"><span class="kn">04</span> Cotizador instantáneo</p>
-          <h2 class="h2" data-split>Tu precio, <em>ahora.</em></h2>
-          <p class="section__lead reveal">Elegí cómo arrancar. El precio es estimado y lo confirmamos al revisar tu pieza o archivo.</p>
+        <header class="section__head head">
+          <p class="label">Cotizador instantáneo</p>
+          <h2 class="h2">Tu precio, <em>ahora.</em></h2>
+          <p class="section__lead">Elegí cómo arrancar. El precio es estimado y lo confirmamos al revisar tu pieza o archivo.</p>
         </header>
         <div class="quote" id="quote">
           <div class="tabs" role="tablist" aria-label="Tipo de cotización">
@@ -405,10 +411,10 @@
     <!-- 05. MATERIALES -->
     <section id="materiales" class="section section--walnut">
       <div class="wrap">
-        <header class="section__head">
-          <p class="kicker kicker--light reveal"><span class="kn">05</span> Materiales</p>
-          <h2 class="h2" data-split>El material correcto <em>para cada pieza.</em></h2>
-          <p class="section__lead reveal">Imprimimos en una Elegoo Centauri Carbon 2: CoreXY cerrada, boquilla endurecida a 350&nbsp;°C, cama a 110&nbsp;°C y hasta 4 colores. Volumen máximo de 256 × 256 × 256&nbsp;mm.</p>
+        <header class="section__head head">
+          <p class="label label--light">Materiales</p>
+          <h2 class="h2">El material correcto <em>para cada pieza.</em></h2>
+          <p class="section__lead">Imprimimos en una Elegoo Centauri Carbon 2: CoreXY cerrada, boquilla endurecida a 350&nbsp;°C, cama a 110&nbsp;°C y hasta 4 colores. Volumen máximo de 256 × 256 × 256&nbsp;mm.</p>
         </header>
         <div class="materials" id="lista-materiales">
           <!-- Se completa desde config.js (MATERIALES) -->
@@ -419,9 +425,9 @@
     <!-- 06. FAQ -->
     <section id="faq" class="section section--alt">
       <div class="wrap wrap--narrow">
-        <header class="section__head">
-          <p class="kicker reveal"><span class="kn">06</span> Preguntas frecuentes</p>
-          <h2 class="h2" data-split>Lo que nos <em>preguntan siempre.</em></h2>
+        <header class="section__head head">
+          <p class="label">Preguntas frecuentes</p>
+          <h2 class="h2">Lo que nos <em>preguntan siempre.</em></h2>
         </header>
         <div class="faq">
           <details class="reveal">
@@ -465,15 +471,13 @@
     </section>
 
     <!-- 07. CONTACTO -->
-    <section id="contacto" class="section section--dark section--contacto" data-glow>
-      <div class="glow" aria-hidden="true"></div>
-      <div class="grain" aria-hidden="true"></div>
+    <section id="contacto" class="section section--dark section--contacto">
       <div class="wrap contact">
         <div>
-          <p class="kicker kicker--light reveal"><span class="kn">07</span> Contacto</p>
-          <h2 class="h2 h2--xl" data-split>Contanos qué pieza <em>necesitás.</em></h2>
-          <p class="section__lead reveal">Respondemos por WhatsApp. Atendemos empresas, talleres e industrias de Zona Norte y particulares con una pieza puntual.</p>
-          <a class="btn btn--primary btn--lg magnetic reveal" href="https://wa.me/541161191201" target="_blank" rel="noopener">
+          <p class="label label--light">Contacto</p>
+          <h2 class="h2 h2--xl">Contanos qué pieza <em>necesitás.</em></h2>
+          <p class="section__lead">Respondemos por WhatsApp. Atendemos empresas, talleres e industrias de Zona Norte y particulares con una pieza puntual.</p>
+          <a class="btn btn--primary btn--lg reveal" href="https://wa.me/541161191201" target="_blank" rel="noopener">
             <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true" focusable="false"><use href="#ico-wa"/></svg>
             Escribinos por WhatsApp <span class="btn-arrow" aria-hidden="true">↗</span>
           </a>
@@ -492,6 +496,10 @@
   <footer class="footer">
     <div class="wrap">
       <div class="footer__grid">
+        <div class="footer__brand">
+          <img src="img/logo-claro.svg" alt="DepthCo" width="144" height="40">
+          <p>Impresión 3D y repuestos a medida, capa por capa.</p>
+        </div>
         <div>
           <h3>Repuestos</h3>
           <p><a href="#cotizador" data-tab="foto">Cotizá con una foto</a><br><a href="#cotizador" data-tab="archivo">Tengo el archivo</a><br><a href="#materiales">Materiales</a></p>
@@ -505,13 +513,12 @@
           <p><a href="https://wa.me/541161191201" target="_blank" rel="noopener">WhatsApp ↗</a><br><a href="https://www.instagram.com/depthco.3d/" target="_blank" rel="noopener">@depthco.3d ↗</a><br>San Isidro, Buenos Aires</p>
         </div>
       </div>
-      <div class="footer__word reveal" aria-hidden="true"><img src="img/logo-claro.svg" alt="" width="389" height="108"></div>
       <div class="footer__bottom">
         <span>Impresión 3D y repuestos a medida · San Isidro, Buenos Aires</span>
         <span><a href="admin.html">Panel</a> · <a href="#inicio">Volver arriba ↑</a></span>
       </div>
     </div>
-    <a class="wa-float magnetic" href="https://wa.me/541161191201" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
+    <a class="wa-float" href="https://wa.me/541161191201" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
       <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true" focusable="false"><use href="#ico-wa"/></svg>
     </a>
   </footer>
