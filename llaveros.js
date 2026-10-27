@@ -67,7 +67,7 @@
     marcar("color2", L.colores[1] && L.colores[1].nombre);
 
     $("ll-usos").innerHTML = (L.usos || []).map(function (u) {
-      return '<article class="use build"><h3>' + esc(u.titulo) + '</h3><p>' + esc(u.texto) + '</p></article>';
+      return '<article class="use reveal"><h3>' + esc(u.titulo) + '</h3><p>' + esc(u.texto) + '</p></article>';
     }).join("");
     $("ll-usos").dispatchEvent(new CustomEvent("depthco:contenido", { bubbles: true }));
 

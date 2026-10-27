@@ -41,13 +41,13 @@
       var precio = m.precio
         ? '<span class="modelo__precio">' + pesos(m.precio) + '</span>'
         : '<span class="modelo__consulta">Consultá el precio</span>';
-      return '<article class="modelo build' + (fotoUrl ? " modelo--foto" : "") + '" data-i="' + i + '">' + foto +
+      return '<article class="modelo reveal' + (fotoUrl ? " modelo--foto" : "") + '" data-i="' + i + '">' + foto +
         '<div class="modelo__nombre">' + (m.tipo ? '<span class="modelo__n">' + esc(m.tipo) + '</span>' : "") +
-        '<h2 data-split>' + esc(m.nombre) + '</h2>' + (m.medidas ? '<span class="modelo__spec">' + esc(m.medidas) + '</span>' : "") + '</div>' +
+        '<h2>' + esc(m.nombre) + '</h2>' + (m.medidas ? '<span class="modelo__spec">' + esc(m.medidas) + '</span>' : "") + '</div>' +
         '<div class="modelo__body">' + (m.descripcion ? '<p class="modelo__desc">' + esc(m.descripcion) + '</p>' : "") +
         '<fieldset class="colores"><legend>Color</legend><div class="colores__fila">' + colores + '</div></fieldset>' +
         '<div class="modelo__compra">' + precio +
-        '<a class="btn magnetic" target="_blank" rel="noopener" href="' + waHref(m, LA.colores[0] || "a definir") + '">' +
+        '<a class="btn" target="_blank" rel="noopener" href="' + waHref(m, LA.colores[0] || "a definir") + '">' +
         '<svg viewBox="0 0 32 32" width="20" height="20" aria-hidden="true" focusable="false"><use href="#ico-wa"/></svg>' +
         (m.precio ? "Encargala" : "Consultar") + '</a>' +
         (mlUrl ? '<a class="link-ml" href="' + esc(mlUrl) + '" target="_blank" rel="noopener">Ver en Mercado Libre</a>' : "") +
