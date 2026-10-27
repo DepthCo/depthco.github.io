@@ -34,10 +34,11 @@ Paleta "Óxido — marrón industrial" (definir como variables CSS en :root; aju
 ```
 - Marrón (nogal/óxido) es el color protagonista de la marca. Usar hueso como fondo general y alternar secciones en nogal o grafito para dar ritmo.
 - Motivo gráfico "capa por capa": líneas horizontales finas y paralelas (como capas de impresión) en fondos sutiles, bandas y en el hover de tarjetas.
-- Identidad propia de "ficha técnica" (se tomó la idea de movimiento de otras webs, pero sin copiar layout): hero claro con una cotización de ejemplo que se "imprime" capa por capa (calculada con pricing.js), franja nogal con la ficha de la máquina, etiquetas de sección en Archivo ancha con tres capas al lado (sin números), línea de "pasada de boquilla" sobre cada título, pasos de "Cómo trabajamos" con una pieza que crece una capa por paso, llaveros y lámparas destacados en la portada.
-- Movimiento en `motion.js` (sin librerías): `.reveal` y `.head` al entrar, `[data-count]`, `[data-nav]` (menú que se oculta al bajar), `[data-page-progress]` (línea de lectura). Nada de intro a pantalla completa, marquee, botones magnéticos ni títulos letra por letra. TODO entra de ARRIBA HACIA ABAJO, solo opacity/transform (nada de clip-path en bloques grandes ni backdrop-filter), respetar prefers-reduced-motion. El contenido siempre visible en reposo.
+- Diseño: la versión original (hero claro, secciones con líneas de capa) con las animaciones tomadas de crosta: intro con el símbolo (solo la primera visita de la sesión), títulos `[data-split]` palabra por palabra, banda en movimiento (marquee) en óxido con el símbolo, párrafo `[data-scrub]` que se enciende, `.magnetic`, `[data-glow]` en el hero, `[data-progress]` en los pasos y `[data-nav]` (menú que se oculta al bajar). Llaveros y lámparas destacados en la portada (sección #productos).
+- Movimiento en `motion.js` (sin librerías). TODO entra de ARRIBA HACIA ABAJO, solo opacity/transform (nada de clip-path en bloques grandes ni backdrop-filter), respetar prefers-reduced-motion. El contenido siempre visible en reposo.
+- Llaveros: marketing con el precio MÁS BAJO primero ("desde $X c/u comprando N o más") en el hero, en la portada y en la tabla de precios (ordenada del más barato al más caro, con "Mejor precio").
 - Logo: "Co anidado" (símbolo C con la o adentro + "Depth"), en color de la paleta, nunca en blanco y negro. Archivo en /img/logo.svg (o .png). Si todavía no está, dejar un placeholder de texto "DepthCo" en nogal y un TODO.
-- Tipografía: Archivo 800 en minúscula y con interletra cerrada para títulos, Archivo ancha (`font-stretch: 125%`, mayúsculas chicas) para etiquetas + Inter para texto. Números de precio grandes, en óxido.
+- Tipografía: sans geométrica para títulos (Space Grotesk) + Inter para texto. Números de precio grandes, en óxido.
 - Minimalista, industrial, cálido. Nada que parezca juguete o gimmick. Sin emojis. Fotos reales de piezas sobre fondo neutro.
 
 ## Stack técnico
