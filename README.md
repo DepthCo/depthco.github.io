@@ -8,8 +8,8 @@ HTML + CSS + JS sin frameworks ni build step. Todo el cálculo corre en el naveg
 1. Subí este repo a GitHub (branch `main`).
 2. En el repo: **Settings → Pages**.
 3. En "Build and deployment", Source: **Deploy from a branch**. Branch: **main**, carpeta **/ (root)** → **Save**.
-4. En 1–2 minutos la web queda en **https://depthcoestudio-lang.github.io/Depthco-Web/**
-   (el panel: https://depthcoestudio-lang.github.io/Depthco-Web/admin.html).
+4. En 1–2 minutos la web queda en **https://depthco.github.io/**
+   (el panel: https://depthco.github.io/admin.html).
 
 ## Dónde cambiar precios
 
@@ -42,7 +42,7 @@ node test/precios.test.js
 
 ## Panel para editar la web (admin.html)
 
-Entrá a `https://depthcoestudio-lang.github.io/Depthco-Web/admin.html` (guardalo en favoritos; no aparece en el menú ni en buscadores).
+Entrá a `https://depthco.github.io/admin.html` (guardalo en favoritos; no aparece en el menú ni en buscadores).
 Desde ahí agregás y editás, sin tocar código:
 
 - **Llaveros:** precios por cantidad, diseño del logo, modelos del catálogo (con foto), colores, formas, fotos de trabajos.
